@@ -14,6 +14,14 @@ composer require idev/easyadmin
             "Idev\\EasyAdmin\\": "vendor/idev/easyadmin/src/"
         }
     },
+
+
+   "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/idevsemarang/easyadmin"
+        }
+    ]
    </pre>
  
 3. Add provider to config/app.php <br>
