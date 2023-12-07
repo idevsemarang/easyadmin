@@ -1,0 +1,23 @@
+{
+    "name": "idev/easyadmin",
+    "description": "Admin packages with easy crud, import and export table",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "openspout/openspout": "^3.7"
+    },
+    "license": "idev",
+    "autoload": {
+        "psr-4": {
+            "Idev\\Easyadmin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "danihadi",
+            "email": "idevsemarang@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

@@ -1,0 +1,61 @@
+.sidebar-wrapper .menu .sidebar-item.active>.sidebar-link {
+    background-color: #3f51b5;
+}
+
+
+.idev-pagination .paginate_button {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: #000000 !important;
+    padding: 0.3em 0.8em;
+}
+
+.idev-pagination .paginate_button:hover {
+    background: #787879;
+    border: 1px solid #787879;
+    color: #ffffff !important;
+}
+
+.idev-pagination .current {
+    background: #9d9d9e;
+    border: 1px solid #a1aab2;
+    color: #ffffff !important;
+    padding: 0.3em 0.8em;
+    border-radius: 6px;
+}
+
+.section-footer {
+    background-color: #435ebe;
+    color: #ffffff;
+    font-size: 20px;
+    padding-top: 6px;
+}
+
+.title-header{
+    font-size: large;
+    margin-top: 26px;
+    font-weight: bold;
+}
+
+.radius-6{
+    border-radius: 6px;
+}
+
+.field-bulktable{
+    border: 1px solid #ced4da;
+    /* background: #fefefe; */
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.pc-header .m-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 260px;
+    padding: 16px 10px 16px 24px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #673ab7;
+}
