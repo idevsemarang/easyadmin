@@ -1,6 +1,6 @@
 <?php
 
-namespace Idev\EasyAdmin\app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Exception;
 use Idev\EasyAdmin\app\Helpers\Validation;
@@ -30,7 +30,7 @@ class SampleDataController extends Controller
     public function __construct()
     {
         $this->title = 'SampleData';
-        $this->generalUri = 'role';
+        $this->generalUri = 'sample-data';
         $this->arrPermissions = [];
         $this->actionButtons = ['btn_edit', 'btn_show', 'btn_destroy'];
         $this->constGender = [
@@ -89,6 +89,7 @@ class SampleDataController extends Controller
             'easyadmin::backend.idev.buttons.import_default',
         ];
         $data['templateImportExcel'] = "#";
+        $data['filters'] = $this->filters();
 
         $layout = (request('from_ajax') && request('from_ajax') == true) ? 'easyadmin::backend.idev.list_drawer_ajax' : 'easyadmin::backend.idev.list_drawer';
 

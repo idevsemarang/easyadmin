@@ -1,6 +1,6 @@
 <?php
 
-namespace Idev\EasyAdmin\Database\Seeders;
+namespace database\Seeders;
 
 use Idev\EasyAdmin\app\Models\Role;
 use Idev\EasyAdmin\app\Models\SampleData;
