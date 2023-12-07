@@ -5,7 +5,7 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0",
-        "openspout/openspout": "^3.7"
+        "openspout/openspout": "^4.22"
     },
     "license": "idev",
     "autoload": {
