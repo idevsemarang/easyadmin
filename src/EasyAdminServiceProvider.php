@@ -30,7 +30,7 @@ class EasyAdminServiceProvider extends ServiceProvider
             __DIR__.'/app/Helpers/Sidebar.php' => app_path('Helpers/Sidebar.php'),
         ], 'sidebar');
         $this->publishes([
-            __DIR__.'/app/Controllers/SampleDataController.php' => app_path('Controllers/SampleDataController.php'),
+            __DIR__.'/app/Http/Controllers/SampleDataController.php' => app_path('Http/Controllers/SampleDataController.php'),
         ], 'sample-crud');
         if ($this->app->runningInConsole()) {
             $this->publishes([
