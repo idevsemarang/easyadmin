@@ -36,7 +36,7 @@ class EasyAdminServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/database/seeders' => database_path('seeders'),
                 __DIR__.'/database/migrations' => database_path('migrations'),
-            ], 'seeds-migrations');
+            ], 'migrate-and-seed');
         }
     }
 }
