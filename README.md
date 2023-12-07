@@ -3,7 +3,7 @@
 Admin packages with easy crud, import and export table 
 
 ## Installation
-1. Add package to composer.json
+1. Add package to composer.json <br>
 composer require idev/easyadmin
 
 2. Add autoload to composer.json
