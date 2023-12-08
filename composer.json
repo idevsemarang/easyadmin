@@ -1,5 +1,5 @@
 {
-    "name": "idev/easyadmin",
+    "name": "idevsmg/easyadmin",
     "description": "Admin packages with easy crud, import and export table",
     "type": "library",
     "require": {
@@ -7,7 +7,7 @@
         "barryvdh/laravel-dompdf": "^2.0",
         "openspout/openspout": "^4.22"
     },
-    "license": "idev",
+    "license": "idev project",
     "autoload": {
         "psr-4": {
             "Idev\\Easyadmin\\": "src/"
