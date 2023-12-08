@@ -27,7 +27,12 @@ Admin packages with easy crud, import and export datas
    </pre>
 
 4. Run installation<br>
-php artisan vendor:publish --tag=install-idev --force
+    <pre>
+    composer dump-autoload
+
+    php artisan vendor:publish --tag=install-idev --force
+   </pre>
+then you can doing migration and seeder
 
 ## Middleware CRUD (Optional)
 We also prepare middleware for access control in your crud by adding snippet code below into kernel.php  <br>
