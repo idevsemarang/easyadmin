@@ -22,7 +22,7 @@ Route::post('login', [AuthController::class, 'authenticate'])->middleware('web')
 Route::get('/', [AuthController::class, 'login'])->name('login')->middleware('web');
 Route::get('cek', [AuthController::class, 'cek']);
 
-Route::group(['middleware' => ['web', 'auth', 'middlewareByAccess']], function () {
+Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::resource('role', RoleController::class);
@@ -36,11 +36,9 @@ Route::group(['middleware' => ['web', 'auth', 'middlewareByAccess']], function (
     Route::get('user-export-pdf-default', [UserController::class, 'exportPdf'])->name('user.export-pdf-default');
     Route::get('user-export-excel-default', [UserController::class, 'exportExcel'])->name('user.export-excel-default');
     Route::post('user-import-excel-default', [UserController::class, 'importExcel'])->name('user.import-excel-default');
-});
 
-Route::group(['middleware' => ['web','auth']], function () {
     Route::get('logout', [AuthController::class, 'logout'])->name("logout");
-   
+  
     Route::get('my-account', [UserController::class, 'profile']);
     Route::post('update-profile', [UserController::class, 'updateProfile']);
 });

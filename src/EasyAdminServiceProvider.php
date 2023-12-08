@@ -25,18 +25,15 @@ class EasyAdminServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/public' => public_path('easyadmin'),
-        ], 'public');
-        $this->publishes([
             __DIR__.'/app/Helpers/Sidebar.php' => app_path('Helpers/Sidebar.php'),
-        ], 'sidebar');
+            __DIR__.'/app/Models/User.php' => app_path('Models/User.php'),
+            __DIR__.'/database/seeders' => database_path('seeders'),
+            __DIR__.'/database/migrations' => database_path('migrations'),
+        ], 'install');
+        
         $this->publishes([
+            __DIR__.'/app/Models/SampleData.php' => app_path('Models/SampleData.php'),
             __DIR__.'/app/Http/Controllers/SampleDataController.php' => app_path('Http/Controllers/SampleDataController.php'),
         ], 'sample-crud');
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/database/seeders' => database_path('seeders'),
-                __DIR__.'/database/migrations' => database_path('migrations'),
-            ], 'migrate-and-seed');
-        }
     }
 }

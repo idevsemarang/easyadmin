@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Idev\EasyAdmin\app\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Idev\EasyAdmin\app\Models\SampleData;
+use App\Models\SampleData;
 use PDF;
-use Excel;
 use Idev\EasyAdmin\app\Exports\DefaultExport;
 use Idev\EasyAdmin\app\Helpers\Constant;
-use App\Helpers\Sidebar;
 use Idev\EasyAdmin\app\Imports\DefaultImport;
-use Idev\EasyAdmin\app\Imports\SampleDataImport;
 use Throwable;
 
 class SampleDataController extends Controller
