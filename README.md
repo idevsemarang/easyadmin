@@ -5,7 +5,7 @@ Admin packages with easy crud, import and export datas
 ## Installation
 1. Add package to composer.json <br>
     <pre>
-    composer require idev/easyadmin:dev-main
+    composer require idevsmg/easyadmin:dev-main
     </pre>
 
 2. Add autoload to composer.json
