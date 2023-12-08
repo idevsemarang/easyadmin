@@ -1,49 +1,57 @@
 ## iDev Easy Admin
 
-Admin packages with easy crud, import and export table 
+Admin packages with easy crud, import and export datas 
 
 ## Installation
 1. Add package to composer.json <br>
-composer require idev/easyadmin
+    <pre>
+    composer require idev/easyadmin:dev-main
+    </pre>
 
 2. Add autoload to composer.json
    <pre>
     "autoload": {
         "psr-4": {
             ....
-            "Idev\\EasyAdmin\\": "vendor/idev/easyadmin/src/"
+            "Idev\\EasyAdmin\\": "vendor/idevsmg/easyadmin/src/"
         }
     },
-
-
-   "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/idevsemarang/easyadmin"
-        }
-    ]
    </pre>
  
-3. Add provider to config/app.php <br>
-Idev\EasyAdmin\EasyAdminServiceProvider::class
+3. Add provider to config/app.php providers <br>
+    <pre>
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        .....
+        Idev\EasyAdmin\EasyAdminServiceProvider::class,
+    ])->toArray(),
+   </pre>
 
-4. run composer update
+4. Run installation<br>
+php artisan vendor:publish --tag=install-idev --force
 
-Now, publish some method :<br>
-php artisan vendor:publish --tag=public --force  <br>
-php artisan vendor:publish --tag=sidebar --force  <br>
-php artisan vendor:publish --tag=migrate-and-seed --force  <br>
+## Middleware CRUD (Optional)
+We also prepare middleware for access control in your crud by adding snippet code below into kernel.php  <br>
+    <pre>
+    protected $middlewareAliases = [
+        .....
+        'middlewareByAccess' => \App\Http\Middleware\MiddlewareByAccess::class
+    ];
+   </pre>
+   
+And don't forget to implement this middleware into your route
+<pre>
+   Route::group(['middleware' => ['web', 'auth', 'middlewareByAccess']], function () {
+       ......
+   });
+</pre>
 
-and set middleware by access to your kernel.php  <br>
-'middlewareByAccess' => \Idev\EasyAdmin\app\Http\Middleware\MiddlewareByAccess::class,
-
-## Sample CRUD
-if you want to make a crud controller, you can publish sample-crud <br>
-php artisan vendor:publish --tag=sample-crud --force (optional)  <br>
+## Sample CRUD  (Optional)
+if you want to view our sample crud controller, you can publish sample-crud. <br>
+php artisan vendor:publish --tag=sample-crud --force <br>
 
 and set your like this
 <pre>
-   Route::group(['middleware' => ['web', 'auth', 'middlewareByAccess']], function () {
+   Route::group(['middleware' => ['web', 'auth']], function () {
        Route::resource('sample-data', SampleDataController::class);
        Route::get('sample-data-api', [SampleDataController::class, 'indexApi'])->name('sample-data.listapi');
        Route::get('sample-data-export-pdf-default', [SampleDataController::class, 'exportPdf'])->name('sample-data.export-pdf-default');

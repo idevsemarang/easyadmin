@@ -23,13 +23,15 @@ class EasyAdminServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->app->make('request');
 
-        $this->publishes([
-            __DIR__.'/public' => public_path('easyadmin'),
-            __DIR__.'/app/Helpers/Sidebar.php' => app_path('Helpers/Sidebar.php'),
-            __DIR__.'/app/Models/User.php' => app_path('Models/User.php'),
-            __DIR__.'/database/seeders' => database_path('seeders'),
-            __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'install');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/public' => public_path('easyadmin'),
+                __DIR__.'/app/Helpers/Sidebar.php' => app_path('Helpers/Sidebar.php'),
+                __DIR__.'/app/Models/User.php' => app_path('Models/User.php'),
+                __DIR__.'/database/seeders' => database_path('seeders'),
+                __DIR__.'/database/migrations' => database_path('migrations'),
+            ], 'install-idev');
+        }
         
         $this->publishes([
             __DIR__.'/app/Models/SampleData.php' => app_path('Models/SampleData.php'),

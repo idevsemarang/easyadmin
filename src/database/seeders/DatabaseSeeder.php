@@ -3,7 +3,7 @@
 namespace database\Seeders;
 
 use Idev\EasyAdmin\app\Models\Role;
-use Idev\EasyAdmin\app\Models\SampleData;
+// use App\Models\SampleData;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User;
 
@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->role();
         $this->user();
-        $this->sampleData();
+       // $this->sampleData();
     }
 
     public function role()
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
         );
     }
 
-
+    /*
     public function sampleData()
     {
         SampleData::updateOrCreate(
@@ -111,4 +111,5 @@ class DatabaseSeeder extends Seeder
             ]
         );
     }
+    */
 }
