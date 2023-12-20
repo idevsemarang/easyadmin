@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::post('login', [AuthController::class, 'authenticate'])->middleware('web');
 Route::get('/', [AuthController::class, 'login'])->name('login')->middleware('web');
 Route::get('cek', [AuthController::class, 'cek']);

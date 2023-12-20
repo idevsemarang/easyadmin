@@ -32,7 +32,7 @@
                         </div>
                         
                         <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-secondary" id="btn-for-form-login" onclick="submitAfterValid('form-login', '-login')">Sign In</button>
+                            <button type="button" class="btn btn-danger" id="btn-for-form-login" onclick="submitAfterValid('form-login', '-login')">Sign In</button>
                         </div>
                     </form>
                 </div>

@@ -2,8 +2,10 @@
 
 namespace Idev\EasyAdmin\app\Exports;
 
+use OpenSpout\Common\Entity\Row;
 use OpenSpout\Common\Entity\Style\CellAlignment;
 use OpenSpout\Common\Entity\Style\Color;
+use OpenSpout\Common\Entity\Style\Style;
 use OpenSpout\Writer\Common\Creator\WriterFactory;
 use OpenSpout\Common\Type;
 use OpenSpout\Writer\Common\Creator\Style\StyleBuilder;
@@ -35,27 +37,25 @@ class DefaultExport
             $writer->openToFile($filename);
 
             // Set headers
-            $styleForHeader = (new StyleBuilder())
-                    ->setFontBold()
-                    ->setFontSize(11)
-                    ->setFontColor($this->headerTextColor)
-                    ->setShouldWrapText(true)
-                    ->setCellAlignment(CellAlignment::CENTER)
-                    ->setBackgroundColor($this->headerBackgroundColor)
-                    ->build();
+            $styleForHeader = new Style();
+            $styleForHeader->setFontBold();
+            $styleForHeader->setFontSize(11);
+            $styleForHeader->setFontColor($this->headerTextColor);
+            $styleForHeader->setShouldWrapText();
+            $styleForHeader->setCellAlignment(CellAlignment::CENTER);
+            $styleForHeader->setBackgroundColor($this->headerBackgroundColor);
 
-            $styleForBody = (new StyleBuilder())
-                    ->setFontSize(11)
-                    ->setShouldWrapText(true)
-                    ->setCellAlignment(CellAlignment::LEFT)
-                    ->build();
+            $styleForBody = new Style();
+            $styleForBody->setFontSize(11);
+            $styleForBody->setShouldWrapText(true);
+            $styleForBody->setCellAlignment(CellAlignment::LEFT);
            
             $arrHeaders = [];
             foreach ($this->dataHeaders as $key => $hd) {
               $arrHeaders[] = $hd['name'];
             }
 
-            $rowHeader = WriterEntityFactory::createRowFromArray($arrHeaders, $styleForHeader);
+            $rowHeader = Row::fromValues($arrHeaders, $styleForHeader);
             $writer->addRow($rowHeader);
 
             // Add data
@@ -68,7 +68,7 @@ class DefaultExport
                         $arrBody[] = $dq->{$hd['column']};
                     }
                 }
-                $rowBody = WriterEntityFactory::createRowFromArray($arrBody, $styleForBody);
+                $rowBody = Row::fromValues($arrBody, $styleForBody);
                 $writer->addRow($rowBody);
             }
             
