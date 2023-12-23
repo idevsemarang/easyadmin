@@ -57,7 +57,7 @@ class ControllerMaker extends Command
         $lowerLetter = strtolower($slug);
 
         $destinationPath = app_path('Http/Controllers/' . $firstCaps."Controller.php");
-        $sourcePath = app_path('Console/Commands/sample-controller.idev');
+        $sourcePath = __DIR__.'/sample-controller.idev';
 
         copy($sourcePath, $destinationPath);
 
@@ -76,7 +76,7 @@ class ControllerMaker extends Command
 
         // Model section
         $destinationPath = app_path('Models/' . $firstCaps.".php");
-        $sourcePath = app_path('Console/Commands/sample-model.idev');
+        $sourcePath = __DIR__.'/sample-model.idev';
 
         copy($sourcePath, $destinationPath);
 

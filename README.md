@@ -34,6 +34,19 @@ Admin packages with easy crud, import and export datas
    </pre>
 then you can doing migration and seeder
 
+## CRUD Generator 
+You can easily create your crud controller, let's enable command via app/Console/Kernel.php
+<pre>
+    protected $commands = [
+        \Idev\EasyAdmin\app\Console\Commands\ControllerMaker::class,
+    ];
+</pre>
+make sure the table migration has been created
+then you just type: 
+<pre>
+    php artisan idev:controller-maker --slug={your-route} --table={your-table}
+</pre>
+
 ## Middleware CRUD (Optional)
 We also prepare middleware for access control in your crud by adding snippet code below into kernel.php  <br>
     <pre>
