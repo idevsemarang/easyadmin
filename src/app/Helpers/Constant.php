@@ -8,22 +8,39 @@ use Illuminate\Support\Facades\Auth;
 class Constant
 {
 
+  private $alias = [
+    'list' => ['index', 'listapi'],
+    'show' => ['show'],
+    'create' => ['create', 'store'],
+    'edit' => ['edit', 'update'],
+    'delete' => ['delete','destroy'],
+    'export-pdf-default' => ['export-pdf-default'],
+    'export-excel-default' => ['export-excel-default'],
+    'import-excel-default' => ['import-excel-default'],
+  ];
+
   public function permissions()
   {
     $arrParent = [
       'list_access' => []
     ];
     
-    $kjs = Role::where('id', Auth::user()->role_id)->first();
+    $kjs = Auth::user()->role->access;
 
     if ($kjs) {
-      $accessJson = json_decode($kjs->access, true);
-      $arrAccess = [];
+      $accessJson = json_decode($kjs, true);
+
       foreach ($accessJson as $key => $aj) {
         foreach ($aj['access'] as $key => $access) {
-          $arrAccess[] = $aj['route'] . "." . $access;
+          if (array_key_exists($access, $this->alias)) {
+            foreach ($this->alias[$access] as $key => $accJson) {
+              $arrAccess[] = $aj['route'] . "." . $accJson;
+            }
+          }
         }
       }
+
+
       $arrParent = [
         'list_access' => $arrAccess
       ];
@@ -33,19 +50,25 @@ class Constant
   }
 
 
-  public function permissionByMenu($menu){
-    $kjs = Role::where('id', Auth::user()->role_id)->first();
+  public function permissionByMenu($menu)
+  {
 
-    $arrAccess = [];
-    
+    $kjs = Auth::user()->role->access;
+
     if ($kjs) {
-      $accessJson = json_decode($kjs->access, true);
+      $accessJson = json_decode($kjs, true);
+
       $colAccess = collect($accessJson)->where('route', $menu)->first();
       if ($colAccess) {
-        $arrAccess = $colAccess['access'];
+        foreach ($colAccess['access'] as $key => $access) {
+          if (array_key_exists($access, $this->alias)) {
+            foreach ($this->alias[$access] as $key => $accJson) {
+              $arrAccess[] = $accJson;
+            }
+          }
+        }
       }
     }
-
     return $arrAccess;
   }
 

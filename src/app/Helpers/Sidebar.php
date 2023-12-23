@@ -10,9 +10,7 @@ class Sidebar
 {
 
   public function generate()
-  {
-    $permission = (new Constant())->permissions();
-    
+  {    
     $menus = $this->menus();
 
     $arrMenu = [];
@@ -64,7 +62,7 @@ class Sidebar
 
 
   public function defaultAllAccess($exclude = []) {
-    return ['index', 'create','store', 'show', 'edit', 'update', 'destroy', 'listapi', 'import-excel-default', 'export-excel-default', 'export-excel-custom', 'export-pdf-default'];
+    return ['list', 'create','show', 'edit', 'delete','import-excel-default', 'export-excel-default','export-pdf-default'];
   }
 
 }

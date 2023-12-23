@@ -38,6 +38,7 @@ then you can doing migration and seeder
 You can easily create your crud controller, let's enable command via app/Console/Kernel.php
 <pre>
     protected $commands = [
+        ....
         \Idev\EasyAdmin\app\Console\Commands\ControllerMaker::class,
     ];
 </pre>
@@ -52,7 +53,7 @@ We also prepare middleware for access control in your crud by adding snippet cod
     <pre>
     protected $middlewareAliases = [
         .....
-        'middlewareByAccess' => \App\Http\Middleware\MiddlewareByAccess::class
+        'middlewareByAccess' => \Idev\EasyAdmin\app\Http\Middleware\MiddlewareByAccess::class
     ];
    </pre>
    

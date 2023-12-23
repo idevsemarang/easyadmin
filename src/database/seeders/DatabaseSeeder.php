@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'admin',
-                'access' => '[{"route":"dashboard","access":["index"]},{"route":"role","access":["index","create","store","show","edit","update","destroy","listapi","import-excel-default","export-excel-default","export-excel-custom","export-pdf-default"]},{"route":"user","access":["index","create","store","show","edit","update","destroy","listapi","import-excel-default","export-excel-default","export-excel-custom","export-pdf-default"]},{"route":"sample-data","access":["index","create","store","show","edit","update","destroy","listapi","import-excel-default","export-excel-default","export-excel-custom","export-pdf-default"]}]',
+                'access' => '[{"route":"dashboard","access":["list"]},{"route":"role","access":["list","create","show","edit","delete","import-excel-default","export-excel-default","export-pdf-default"]},{"route":"user","access":["list","create","show","edit","delete","import-excel-default","export-excel-default","export-pdf-default"]}]',
             ]
         );
 
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'customer',
-                'access' => '[{"route":"dashboard","access":["index"]},{"route":"role","access":["index","create","store","show","edit","update","destroy","listapi","import-excel-default","export-excel-default","export-excel-custom","export-pdf-default"]},{"route":"user","access":["index","create","store","show","edit","update","destroy","listapi","import-excel-default","export-excel-default","export-excel-custom","export-pdf-default"]}]',
+                'access' => '[{"route":"dashboard","access":["list"]}]',
             ]
         );
     }
