@@ -35,6 +35,7 @@ class ControllerMaker extends Command
 
         $strLoopHeaders = "";
         $strLoopHeadersExcel = "";
+        $strLoopFields = "";
         $firstHeaderExcel = "";
         $fillable = [];
         foreach ($columns as $key => $col) {
@@ -42,8 +43,19 @@ class ControllerMaker extends Command
 
             if(!in_array($col, ['id', 'created_at', 'updated_at', 'deleted_at']))
             {
-                $strLoopHeaders .= "['name' => '".$label."', 'column' => '".$col."', 'order' => true],\n";
-                $strLoopHeadersExcel .= "['name' => '".$label."', 'column' => '".$col."'],\n";
+                $strLoopHeaders .= "
+                    ['name' => '".$label."', 'column' => '".$col."', 'order' => true],";
+                $strLoopHeadersExcel .= "
+                    ['name' => '".$label."', 'column' => '".$col."'],";
+                $strLoopFields .= "
+                    [
+                        'type' => 'text',
+                        'label' => '".$label."',
+                        'name' =>  '".$col."',
+                        'class' => 'col-md-12 my-2',
+                        'required' => true,
+                        'value' => (isset(IDEVVARedit)) ? IDEVVARedit->".$col." : ''
+                    ],";
     
                 if($key == 1){
                     $firstHeaderExcel = $col;
@@ -55,6 +67,7 @@ class ControllerMaker extends Command
         $firstCaps = str_replace("-", "", ucwords($slug)); 
         $spaceBetween = str_replace("-", " ", ucwords($slug)); 
         $lowerLetter = strtolower($slug);
+        $strLoopFields = str_replace("IDEVVAR", "$", $strLoopFields); 
 
         $destinationPath = app_path('Http/Controllers/' . $firstCaps."Controller.php");
         $sourcePath = __DIR__.'/sample-controller.idev';
@@ -69,6 +82,7 @@ class ControllerMaker extends Command
         $newContents = Str::replace("LOOPTABLEHEADERS", $strLoopHeaders, $newContents);
         $newContents = Str::replace("LOOPEXCELHEADERS", $strLoopHeadersExcel, $newContents);
         $newContents = Str::replace("FIRSTHEADERSEXCEL", $firstHeaderExcel, $newContents);
+        $newContents = Str::replace("LOOPEXFIELDS", $strLoopFields, $newContents);
 
         if (file_put_contents($destinationPath, $newContents) !== false) {
             $this->info($firstCaps.'Controller created successfully!');
