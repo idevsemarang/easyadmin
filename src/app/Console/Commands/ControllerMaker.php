@@ -96,7 +96,18 @@ class ControllerMaker extends Command
         $strRoutes .= "Route::get('".$lowerLetter."-export-excel-default', [".$firstCaps."Controller::class, 'exportExcel'])->name('".$lowerLetter.".export-excel-default');\n";
         $strRoutes .= "Route::post('".$lowerLetter."-import-excel-default', [".$firstCaps."Controller::class, 'importExcel'])->name('".$lowerLetter.".import-excel-default');\n";
 
-        $this->info('Please copy this code into your route\n'.$strRoutes);
+        $this->info("Please copy this code into your route \n".$strRoutes);
 
+        $strSidebar = "\n
+          [
+            'name' => '".$firstCaps."',
+            'icon' => 'ti ti-menu',
+            'key' => '".$lowerLetter."',
+            'base_key' => '".$lowerLetter."',
+            'visibility' => true,
+            'ajax_load' => false,
+            'childrens' => []
+          ],\n";
+        $this->info("And copy this snippet code into your app/Helpers/Sidebar.php \n".$strSidebar);
     }
 }

@@ -4,12 +4,9 @@ namespace Idev\EasyAdmin\app\Exports;
 
 use OpenSpout\Common\Entity\Row;
 use OpenSpout\Common\Entity\Style\CellAlignment;
-use OpenSpout\Common\Entity\Style\Color;
 use OpenSpout\Common\Entity\Style\Style;
-use OpenSpout\Writer\Common\Creator\WriterFactory;
-use OpenSpout\Common\Type;
-use OpenSpout\Writer\Common\Creator\Style\StyleBuilder;
 use OpenSpout\Writer\Common\Creator\WriterEntityFactory;
+use OpenSpout\Writer\Common\Creator\WriterFactory;
 
 class DefaultExport
 {
@@ -32,7 +29,9 @@ class DefaultExport
     {
         try {
             $filename = $this->filename;
-
+            
+            // $writer = WriterFactory::create(Type::XLSX);
+            // $writer = WriterEntityFactory::createXLSXWriter(); // replaces WriterFactory::create(Type::XLSX)
             $writer = WriterFactory::createFromFile($filename);
             $writer->openToFile($filename);
 

@@ -2,7 +2,6 @@
 
 namespace Idev\EasyAdmin\app\Imports;
 
-use Illuminate\Support\Facades\Log;
 use OpenSpout\Reader\Common\Creator\ReaderFactory;
 
 class DefaultImport 

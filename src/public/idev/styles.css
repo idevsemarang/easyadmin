@@ -70,3 +70,15 @@
     width: 100%;
     max-width: 400px;
 }
+
+.btn-primary-idev{
+    background-color: #6fa8a1;
+    border-color: #6fa8a1;
+}
+
+.btn-primary-idev:hover{
+    background-color: #6fa8a1;
+    border-color: #6fa8a1;
+    color: #ffffff;
+    opacity: 0.8;
+}

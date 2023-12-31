@@ -18,6 +18,7 @@ class DefaultController extends Controller
     protected $modelClass;
     protected $title;
     protected $generalUri;
+    protected $arrPermissions = ['list','show', 'create', 'edit', 'delete', 'export-excel-default', 'export-pdf-default', 'import-excel-default'];
     protected $tableHeaders;
     protected $actionButtons;
     protected $importExcelConfig;
@@ -42,8 +43,8 @@ class DefaultController extends Controller
             ],
         ];
 
-        $permissions = (new Constant())->permissionByMenu($this->generalUri);
-        $data['permissions'] = $permissions;
+        // $permissions = (new Constant())->permissionByMenu($this->generalUri);
+        $data['permissions'] = $this->arrPermissions;
         $data['more_actions'] = $moreActions;
         $data['table_headers'] = $this->tableHeaders;
         $data['title'] = $this->title;
@@ -69,7 +70,7 @@ class DefaultController extends Controller
 
     public function indexApi()
     {
-        $permission = (new Constant)->permissionByMenu($this->generalUri);
+        $permission = $this->arrPermissions;// (new Constant)->permissionByMenu($this->generalUri);
         $eb = [];
         $data_columns = [];
         foreach ($this->tableHeaders as $key => $col) {

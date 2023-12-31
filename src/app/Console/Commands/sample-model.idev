@@ -12,10 +12,10 @@ class SampleData extends Model
     protected $table = 'TABLENAME';
     protected $primaryKey = 'id';
     protected $fillable = CONTENTFILLABLE;
-    protected $appends = ['btn_destroy', 'btn_edit', 'btn_show'];
+    protected $appends = ['btn_delete', 'btn_edit', 'btn_show'];
 
 
-    public function getBtnDestroyAttribute()
+    public function getBtnDeleteAttribute()
     {
         $html = "<button type='button' class='btn btn-outline-danger btn-sm radius-6' style='margin:1px;' data-bs-toggle='modal' data-bs-target='#modalDelete' onclick='setDelete(" . json_encode($this->id) . ")'>
                     <i class='ti ti-trash'></i>

@@ -11,16 +11,16 @@ class SampleDataController extends DefaultController
     protected $title;
     protected $generalUri;
     protected $tableHeaders;
-    protected $actionButtons;
-    protected $arrPermissions;
+    // protected $actionButtons;
+    // protected $arrPermissions;
     protected $importExcelConfig;
 
     public function __construct()
     {
         $this->title = 'Sample Data';
         $this->generalUri = 'sample-data';
-        $this->arrPermissions = [];
-        $this->actionButtons = ['btn_edit', 'btn_show', 'btn_destroy'];
+        // $this->arrPermissions = [];
+        $this->actionButtons = ['btn_edit', 'btn_show', 'btn_delete'];
 
         $this->tableHeaders = [
             ['name' => 'No', 'column' => '#', 'order' => true],
