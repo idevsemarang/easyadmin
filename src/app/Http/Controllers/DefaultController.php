@@ -170,6 +170,19 @@ class DefaultController extends Controller
     }
 
 
+    protected function flagRules($key, $id = null)
+    {
+        $required = false;
+        if(array_key_exists($key,$this->rules())){
+            if (str_contains($this->rules()[$key], 'required')) {
+                $required = true;
+            }
+        }
+
+        return $required;
+    }
+
+
     protected function store(Request $request)
     {
         $rules = $this->rules();

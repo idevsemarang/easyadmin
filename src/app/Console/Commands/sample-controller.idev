@@ -50,4 +50,13 @@ class SampleDataController extends DefaultController
         return $fields;
     }
 
+
+    protected function rules($id = null)
+    {
+        $rules = [LOOPRULES
+        ];
+
+        return $rules;
+    }
+
 }

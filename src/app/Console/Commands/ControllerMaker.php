@@ -36,6 +36,7 @@ class ControllerMaker extends Command
         $strLoopHeaders = "";
         $strLoopHeadersExcel = "";
         $strLoopFields = "";
+        $strLoopRules = "";
         $firstHeaderExcel = "";
         $fillable = [];
         foreach ($columns as $key => $col) {
@@ -53,10 +54,11 @@ class ControllerMaker extends Command
                         'label' => '".$label."',
                         'name' =>  '".$col."',
                         'class' => 'col-md-12 my-2',
-                        'required' => true,
+                        'required' => IDEVVARthis->flagRules('".$col."', IDEVVARid),
                         'value' => (isset(IDEVVARedit)) ? IDEVVARedit->".$col." : ''
                     ],";
-    
+                $strLoopRules .= "
+                    '".$col."' => 'required|string',";
                 if($key == 1){
                     $firstHeaderExcel = $col;
                 }
@@ -83,6 +85,7 @@ class ControllerMaker extends Command
         $newContents = Str::replace("LOOPEXCELHEADERS", $strLoopHeadersExcel, $newContents);
         $newContents = Str::replace("FIRSTHEADERSEXCEL", $firstHeaderExcel, $newContents);
         $newContents = Str::replace("LOOPEXFIELDS", $strLoopFields, $newContents);
+        $newContents = Str::replace("LOOPRULES", $strLoopRules, $newContents);
 
         if (file_put_contents($destinationPath, $newContents) !== false) {
             $this->info($firstCaps.'Controller created successfully!');
