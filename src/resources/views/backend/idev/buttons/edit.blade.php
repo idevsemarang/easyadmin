@@ -1,6 +1,6 @@
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
     id="drawerEdit">
-    <div class="offcanvas-header bg-primary">
+    <div class="offcanvas-header bg-secondary">
         <h5 class="text-white">Edit</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group my-2">
-                        <button id="btn-for-form-edit-{{$uri_key}}" type="button" class="btn btn-outline-primary"
+                        <button id="btn-for-form-edit-{{$uri_key}}" type="button" class="btn btn-outline-secondary"
                             onclick="softSubmit('form-edit-{{$uri_key}}', 'list-{{$uri_key}}')">Submit</button>
                         </button>
                     </div>

@@ -13,12 +13,12 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" id="main-font-link" />
 
-  <link rel="stylesheet" href="{{ asset('easyadmin/theme/assets/fonts/tabler-icons.min.css')}}" />
+  <link rel="stylesheet" href="{{ asset('easyadmin/theme/default/fonts/tabler-icons.min.css')}}" />
 
-  <link rel="stylesheet" href="{{ asset('easyadmin/theme/assets/fonts/material.css')}}" />
+  <link rel="stylesheet" href="{{ asset('easyadmin/theme/default/fonts/material.css')}}" />
 
-  <link rel="stylesheet" href="{{ asset('easyadmin/theme/assets/css/style.css')}}" id="main-style-link" />
-  <link rel="stylesheet" href="{{ asset('easyadmin/theme/assets/css/style-preset.css')}}" id="preset-style-link" />
+  <link rel="stylesheet" href="{{ asset('easyadmin/theme/'.config('idev.theme','default').'/css/style.css')}}" id="main-style-link" />
+  <link rel="stylesheet" href="{{ asset('easyadmin/theme/'.config('idev.theme','default').'/css/style-preset.css')}}" id="preset-style-link" />
   <link href="{{ asset('easyadmin/idev/styles.css')}}" rel="stylesheet" />
 </head>
 
@@ -60,7 +60,7 @@
             </a>
           </li>
           <li class="dropdown pc-h-item">
-            <a class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
               <i class="ti ti-user"></i>
             </a>
             <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
@@ -107,13 +107,13 @@
     </div>
   </footer>
 
-  <script src="{{ asset('easyadmin/theme/assets/js/plugins/jquery-3.6.3.min.js')}}"></script>
-  <script src="{{ asset('easyadmin/theme/assets/js/plugins/popper.min.js')}}"></script>
-  <script src="{{ asset('easyadmin/theme/assets/js/plugins/simplebar.min.js')}}"></script>
-  <script src="{{ asset('easyadmin/theme/assets/js/plugins/bootstrap.min.js')}}"></script>
-  <script src="{{ asset('easyadmin/theme/assets/js/plugins/sweet-alert.js')}}"></script>
-  <script src="{{ asset('easyadmin/theme/assets/js/config.js')}}"></script>
-  <script src="{{ asset('easyadmin/theme/assets/js/pcoded.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/plugins/jquery-3.6.3.min.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/plugins/popper.min.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/plugins/simplebar.min.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/plugins/bootstrap.min.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/plugins/sweet-alert.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/config.js')}}"></script>
+  <script src="{{ asset('easyadmin/theme/default/js/pcoded.js')}}"></script>
   <script src="{{ asset('easyadmin/idev/scripts.js')}}"></script>
 
   <div class="push-script-ajax">@stack("scripts")</div>

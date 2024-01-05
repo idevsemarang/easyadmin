@@ -28,7 +28,8 @@
                   @include('easyadmin::backend.idev.fields.'.$field['type'])
                 @endforeach
               </div>
-              <button type="button" id="btn-for-form-maccount" class="btn btn-sm btn-primary" onclick="softSubmit('form-maccount','list')">
+              <hr>
+              <button type="button" id="btn-for-form-maccount" class="btn btn-outline-secondary" onclick="softSubmit('form-maccount','list')">
                     Submit
               </button>
             </form>

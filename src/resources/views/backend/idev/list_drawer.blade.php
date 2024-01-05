@@ -13,7 +13,7 @@
                             <span class="count-total-list-{{$uri_key}} float-end mt-2">0 Data</span>
                         </div>
                         @if (in_array('create', $permissions))
-                        <a class="btn btn-primary float-end text-white" data-bs-toggle="offcanvas" data-bs-target="#createForm-{{$uri_key}}">
+                        <a class="btn btn-secondary float-end text-white" data-bs-toggle="offcanvas" data-bs-target="#createForm-{{$uri_key}}">
                             Create
                         </a>
                         @endif
@@ -128,7 +128,7 @@
 @push('scripts')
 @if (in_array('create', $permissions))
 <div class="offcanvas offcanvas-end @if(isset($drawerExtraClass)) {{ $drawerExtraClass }} @endif" tabindex="-1" id="createForm-{{$uri_key}}" aria-labelledby="createForm-{{$uri_key}}">
-    <div class="offcanvas-header bg-primary">
+    <div class="offcanvas-header bg-secondary">
         <h5 class="text-white">Create New</h5>
         <button type="button" class="btn-close text-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>

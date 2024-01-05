@@ -30,6 +30,7 @@ class EasyAdminServiceProvider extends ServiceProvider
                 __DIR__.'/app/Models/User.php' => app_path('Models/User.php'),
                 __DIR__.'/database/seeders' => database_path('seeders'),
                 __DIR__.'/database/migrations' => database_path('migrations'),
+                __DIR__.'/config/idev.php' => config_path('idev.php'),
             ], 'install-idev');
         }
         
