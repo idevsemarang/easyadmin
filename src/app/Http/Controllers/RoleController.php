@@ -217,7 +217,10 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        $data['detail'] = $this->defaultDataQuery()->where('id', $id)->first();
+        $singleData = $this->defaultDataQuery()->where('id', $id)->first();
+        unset($singleData['id']);
+        
+        $data['detail'] = $singleData;
 
         return view('easyadmin::backend.idev.show-default', $data);
     }

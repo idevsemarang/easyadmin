@@ -224,9 +224,12 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $data['detail'] = $this->defaultDataQuery()->where('users.id', $id)->first();
+        $singleData = $this->defaultDataQuery()->where('users.id', $id)->first();
+        unset($singleData['id']);
+        
+        $data['detail'] = $singleData;
 
-        return view('backend.idev.show-default', $data);
+        return view('easyadmin::backend.idev.show-default', $data);
     }
 
 
