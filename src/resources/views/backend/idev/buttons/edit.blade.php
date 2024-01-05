@@ -11,7 +11,11 @@
             <div class="row content-fields">
                 @php $method = "edit"; @endphp
                 @foreach($edit_fields as $key => $field)
-                @include('easyadmin::backend.idev.fields.'.$field['type'])
+                @if (View::exists('backend.idev.fields.'.$field['type']))
+                    @include('backend.idev.fields.'.$field['type'])
+                @else
+                    @include('easyadmin::backend.idev.fields.'.$field['type'])
+                @endif
                 @endforeach
             </div>
             <div class="row">

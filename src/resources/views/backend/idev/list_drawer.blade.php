@@ -55,7 +55,11 @@
                                         </div>
                                         @if(isset($filters))
                                         @foreach ($filters as $key => $filter)
-                                        @include('easyadmin::backend.idev.filters.'.$filter['type'])
+                                            @if (View::exists('backend.idev.filters.'.$field['type']))
+                                                @include('backend.idev.filters.'.$field['type'])
+                                            @else
+                                                @include('easyadmin::backend.idev.filters.'.$filter['type'])
+                                            @endif
                                         @endforeach
                                         @endif
                                     </div>
@@ -138,7 +142,11 @@
             <div class="row">
                 @php $method = "create"; @endphp
                 @foreach($fields as $key => $field)
-                @include('easyadmin::backend.idev.fields.'.$field['type'])
+                @if (View::exists('backend.idev.fields.'.$field['type']))
+                    @include('backend.idev.fields.'.$field['type'])
+                @else
+                    @include('easyadmin::backend.idev.fields.'.$field['type'])
+                @endif
                 @endforeach
             </div>
             <div class="row">
