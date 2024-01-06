@@ -21,6 +21,7 @@ class EasyAdminServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(base_path('/routes/web.php'));
         $this->app->make('request');
 
         if ($this->app->runningInConsole()) {
