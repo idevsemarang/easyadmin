@@ -55,8 +55,8 @@
                                         </div>
                                         @if(isset($filters))
                                         @foreach ($filters as $key => $filter)
-                                            @if (View::exists('backend.idev.filters.'.$field['type']))
-                                                @include('backend.idev.filters.'.$field['type'])
+                                            @if (View::exists('backend.idev.filters.'.$filter['type']))
+                                                @include('backend.idev.filters.'.$filter['type'])
                                             @else
                                                 @include('easyadmin::backend.idev.filters.'.$filter['type'])
                                             @endif
