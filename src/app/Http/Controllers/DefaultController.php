@@ -113,8 +113,13 @@ class DefaultController extends Controller
 
         $dataQueries = $this->modelClass::where($filters)
             ->where(function ($query) use ($orThose) {
+                $efc = ['#', 'created_at', 'updated_at', 'id'];
+
                 foreach ($this->tableHeaders as $key => $th) {
-                    if(!in_array($th['column'], ['#', 'created_at', 'updated_at', 'id']))
+                    if (array_key_exists('search', $th) && $th['search'] == false) {
+                        $efc[] = $th['column'];
+                    }
+                    if(!in_array($th['column'], $efc))
                     {
                         if($key == 0){
                             $query->where($th['column'], 'LIKE', '%' . $orThose . '%');
