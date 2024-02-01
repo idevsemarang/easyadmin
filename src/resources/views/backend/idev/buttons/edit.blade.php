@@ -45,15 +45,15 @@ function setEdit(id) {
         var fields = response.fields
 
         $.each(fields, function(key, field) {
-            $("#edit_" + field.name).val(field.value)
-            $('#edit_' + field.name).trigger('change')
+            
+           
             if (field.type == "onlyview") {
                 $('#edit_' + field.name).text(field.value)
             }
-            if (field.type == "image") {
+            else if (field.type == "image") {
                 $('.thumb_'+field.name).attr('src', field.value)
             }
-            if (field.type == "select2_ajax_multiple") {
+            else if (field.type == "select2_ajax_multiple") {
                 var selected = [];
                 var initials = [];
                 $.each(field.value, function(index, option) {
@@ -81,7 +81,7 @@ function setEdit(id) {
                 $('#edit_' + field.name).val(selected).trigger('change')
                 $('.s2-' + field.name + ' select').val(selected).trigger('change')
             }
-            if (field.type == "group_checklist") {
+            else if (field.type == "group_checklist") {
                 var htmlCl = ""
                 $.each(field.checklists, function(index, cl) {
                     var labelName = cl.label.replaceAll("-", " ")
@@ -98,6 +98,10 @@ function setEdit(id) {
                     htmlCl += "</div>"
                 });
                 $('#group-checklist-edit_'+field.name).html(htmlCl)
+            }
+            else{
+                $("#edit_" + field.name).val(field.value)
+                $('#edit_' + field.name).trigger('change')
             }
         })
     })
