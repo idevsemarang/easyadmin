@@ -7,7 +7,7 @@ $preffix_method = (isset($method))? $method."_": "";
         <small class="text-danger">*</small>
         @endif
     </label>
-    <select id="{{$preffix_method}}{{(isset($field['name']))?$field['name']:'id_'.$key}}" name="{{(isset($field['name']))?$field['name']:'name_'.$key}}" class="form-control idev-form">
+    <select id="{{$preffix_method}}{{(isset($field['name']))?str_replace("[]","",$field['name']):'id_'.$key}}" name="{{(isset($field['name']))?$field['name']:'name_'.$key}}" class="form-control idev-form">
         @foreach($field['options'] as $key => $opt)
         <option value="{{$opt['value']}}" @if($opt['value'] == $field['value']) selected @endif>{{$opt['text']}}</option>
         @endforeach

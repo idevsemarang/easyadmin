@@ -66,8 +66,19 @@ class ControllerMaker extends Command
             }
         }
 
-        $firstCaps = str_replace("-", "", ucwords($slug)); 
-        $spaceBetween = str_replace("-", " ", ucwords($slug)); 
+        $firstCaps = ucfirst($slug); 
+        $spaceBetween = ucfirst($slug); 
+
+        if (str_contains($slug, "-")) {
+            $parts = explode("-", $slug);
+            foreach ($parts as &$part) {
+                $part = ucfirst($part);
+            }
+            unset($part); // Unset reference to last element
+            $firstCaps = implode("", $parts);
+            $spaceBetween = implode(" ", $parts);
+        }
+
         $lowerLetter = strtolower($slug);
         $strLoopFields = str_replace("IDEVVAR", "$", $strLoopFields); 
 
@@ -117,7 +128,7 @@ class ControllerMaker extends Command
 
         $strSidebar = "\n
           [
-            'name' => '".$firstCaps."',
+            'name' => '".$spaceBetween."',
             'icon' => 'ti ti-menu',
             'key' => '".$lowerLetter."',
             'base_key' => '".$lowerLetter."',

@@ -98,6 +98,23 @@ function setEdit(id) {
                     htmlCl += "</div>"
                 });
                 $('#group-checklist-edit_'+field.name).html(htmlCl)
+            }else if(field.type == "repeatable"){
+                var jsonValues = JSON.parse(field.value)
+                var cloneElement = $('.edit_repeatable-sections .row:last()').clone();
+                var arrClone = [cloneElement]
+
+                $('.edit_repeatable-sections').html("")
+                $.each(jsonValues, function(index, jv) {
+
+                    $('.edit_repeatable-sections').html(arrClone)
+
+                    $('.edit_repeatable-sections .row:last()').attr('id', 'edit_repeatable-'+index)
+                    // $('.edit_repeatable-sections').append(cloneElement);
+                    arrClone.push(cloneElement.clone())
+                    $.each(field.html_fields, function(index2, hf) {
+                        $("#edit_repeatable-"+index+" #edit_" + hf.name).val(jv[hf.name])
+                    })
+                });
             }
             else{
                 $("#edit_" + field.name).val(field.value)

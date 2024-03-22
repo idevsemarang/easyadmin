@@ -10,7 +10,7 @@ $preffix_method = (isset($method))? $method."_": "";
     </label>
     <input 
         type="number" 
-        id="{{$preffix_method}}{{(isset($field['name']))?$field['name']:'id_'.$key}}" 
+        id="{{$preffix_method}}{{(isset($field['name']))?str_replace("[]","",$field['name']):'id_'.$key}}" 
         name="{{(isset($field['name']))?$field['name']:'name_'.$key}}" 
         value="{{(isset($field['value']))?$field['value']:''}}" 
         class="form-control idev-form @if($prefix_repeatable) field-repeatable @endif">
