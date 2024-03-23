@@ -68,7 +68,7 @@ class DefaultController extends Controller
     }
 
 
-    public function indexApi()
+    protected function indexApi()
     {
         $permission = $this->arrPermissions;// (new Constant)->permissionByMenu($this->generalUri);
         $eb = [];
@@ -97,7 +97,7 @@ class DefaultController extends Controller
     }
 
 
-    private function defaultDataQuery()
+    protected function defaultDataQuery()
     {
         $filters = [];
         $orThose = null;
