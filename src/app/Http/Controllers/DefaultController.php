@@ -208,11 +208,8 @@ class DefaultController extends Controller
 
         try {
             $insert = new $this->modelClass();
-            foreach ($this->tableHeaders as $key => $th) {
-                if(!in_array($th['column'], ['#', 'created_at', 'updated_at', 'id']))
-                {
-                    $insert->{$th['column']} = $request[$th['column']];
-                }
+            foreach ($this->fields('create') as $key => $th) {
+                $insert->{$th['name']} = $request[$th['name']];
             }
             $insert->save();
 
@@ -273,11 +270,8 @@ class DefaultController extends Controller
 
         try {
             $change = $this->modelClass::where('id', $id)->first();
-            foreach ($this->tableHeaders as $key => $th) {
-                if(!in_array($th['column'], ['#', 'created_at', 'updated_at', 'id']))
-                {
-                    $change->{$th['column']} = $request[$th['column']];
-                }
+            foreach ($this->fields('edit', $id) as $key => $th) {
+                $change->{$th['name']} = $request[$th['name']];
             }
             $change->save();
 
