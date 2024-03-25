@@ -11,13 +11,13 @@ $preffix_method = (isset($method))? $method."_": "";
         $row_count = sizeof($field['html_fields']);
         @endphp
        
-        <div id="{{$preffix_method}}repeatable-0" class="row field-sections">
+        <div id="{{$preffix_method}}repeatable-0" class="row {{$preffix_method}}field-sections">
 
             @foreach($field['html_fields'] as $key2 => $child_fields)
             @php
             $field = $child_fields;
             $repeatable = true;
-            $field['name'] = $field['name']."[]"
+            $field['name'] = $field['name']."[]";
             @endphp
             @include("easyadmin::backend.idev.fields.".$field['type'])
             @endforeach
@@ -35,7 +35,7 @@ $preffix_method = (isset($method))? $method."_": "";
     @if($enable_action)
     <div class="row">
         <div class="col-md-4">
-            <button type="button" class="btn btn-sm btn-secondary my-2 text-white" onclick="add()">
+            <button type="button" class="btn btn-sm btn-secondary my-2 text-white" onclick="add('{{$preffix_method}}')">
                 <i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="Add"> </i> 1 ITEM
             </button>
         </div>
@@ -74,24 +74,24 @@ $preffix_method = (isset($method))? $method."_": "";
     }
 
 
-    function add() {
+    function add(preffixMethod) {
         var epochMilliseconds = Date.now();
         var epochSeconds = Math.floor(epochMilliseconds / 1000);
 
-        $('.field-sections:last()').attr('id', '{{$preffix_method}}repeatable-'+epochSeconds)
+        $('.'+preffixMethod+'field-sections:last()').attr('id', preffixMethod+'repeatable-'+epochSeconds)
 
-        $('.{{$preffix_method}}repeatable-sections .row:last()').clone().appendTo($('.{{$preffix_method}}repeatable-sections'))
+        $('.'+preffixMethod+'repeatable-sections .row:last()').clone().appendTo($('.'+preffixMethod+'repeatable-sections'))
         // setRepeatableID(numButton)
 
-        var htmlRemove = "<button type='button' class='btn btn-sm btn-circle btn-danger my-4 text-white' onclick='remove("+epochSeconds+")'>"
+        var htmlRemove = "<button type='button' class='btn btn-sm btn-circle btn-danger my-4 text-white' onclick='remove(\""+preffixMethod+"\","+epochSeconds+")'>"
         htmlRemove += "<i class='ti ti-minus' data-toggle='tooltip' data-placement='top' title='Remove'> </i>"
         htmlRemove += "</button>"
-        $('#{{$preffix_method}}repeatable-'+epochSeconds+' .remove-section').html(htmlRemove)
+        $('#'+preffixMethod+'repeatable-'+epochSeconds+' .remove-section').html(htmlRemove)
     }
 
     
-    function remove(index) {
-        $("#{{$preffix_method}}repeatable-"+index).remove();
+    function remove(preffixMethod, index) {
+        $("#"+preffixMethod+"repeatable-"+index).remove();
     }
 </script>
 @endpush
