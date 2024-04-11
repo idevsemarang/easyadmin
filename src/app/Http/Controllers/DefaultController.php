@@ -65,10 +65,20 @@ class DefaultController extends Controller
         $data['templateImportExcel'] = "#";
         $data['import_scripts'] = $this->importScripts;
         $data['import_styles'] = $this->importStyles;
+        $data['import_styles'] = $this->importStyles;
+        $data['filters'] = $this->filters();
 
         $layout = (request('from_ajax') && request('from_ajax') == true) ? 'easyadmin::backend.idev.list_drawer_ajax' : 'easyadmin::backend.idev.list_drawer';
 
         return view($layout, $data);
+    }
+
+
+    protected function filters()
+    {
+        $fields = [];
+
+        return $fields;
     }
 
 
@@ -183,8 +193,16 @@ class DefaultController extends Controller
     {
         $required = false;
         if(array_key_exists($key,$this->rules())){
-            if (str_contains($this->rules()[$key], 'required')) {
-                $required = true;
+            $fieldRules = $this->rules()[$key];
+
+            if (is_array($fieldRules)) {
+                if (in_array('required', $fieldRules)) {
+                    $required = true;
+                }
+            } else {
+                if (str_contains($fieldRules, 'required')) {
+                    $required = true;
+                }
             }
         }
 
