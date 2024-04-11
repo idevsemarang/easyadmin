@@ -76,11 +76,11 @@
                                         $header_column = $header['column'];
                                         @endphp
                                         @if($header['order'])
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="white-space: nowrap;">{{$header_name}}
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-nowrap">{{$header_name}}
                                             <button class="btn btn-sm btn-link" onclick="orderBy('list-{{$uri_key}}','{{$header_column}}')"><i class="bi bi-arrow-up"></i></button>
                                         </th>
                                         @else
-                                        <th style="white-space: nowrap;">{{$header_name}}
+                                        <th class="text-nowrap">{{$header_name}}
                                         </th>
                                         @endif
                                         @endforeach
