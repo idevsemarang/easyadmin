@@ -10,7 +10,7 @@
                 <div class="card-body">
 
                     <a href="#" class="d-flex justify-content-center">
-                        <img src="{{asset('easyadmin/idev/img/logo-idev.png')}}">
+                        <img src="{{ config('idev.app_logo', asset('easyadmin/idev/img/logo-idev.png')) }}">
                     </a>
                     <div class="row">
                         <div class="d-flex justify-content-center">

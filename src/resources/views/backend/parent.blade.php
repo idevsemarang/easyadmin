@@ -10,6 +10,7 @@
   <meta name="description" content="Berry is made using Bootstrap 5 design framework. Download the free admin template & use it for your project." />
   <meta name="keywords" content="Berry, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template" />
   <meta name="author" content="CodedThemes" />
+	<link rel="icon" href=" {{ config('idev.app_favicon', asset('easyadmin/idev/img/favicon.png')) }}">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" id="main-font-link" />
 
@@ -35,7 +36,7 @@
 
   <header class="pc-header">
     <div class="m-header">
-      {{ env('PROJECT_NAME', 'iDev Admin') }}
+      {{ env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) }}
       <div class="pc-h-item">
         <a href="#" class="pc-head-link head-link-secondary m-0" id="sidebar-hide">
           <i class="ti ti-menu-2"></i>
@@ -89,7 +90,7 @@
   <nav class="pc-sidebar">
     <div class="navbar-wrapper">
       <div class="m-header">
-        {{ env('PROJECT_NAME', 'iDev Admin') }}
+        {{ env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) }}
       </div>
       @include('easyadmin::backend.sidebar')
     </div>
@@ -101,7 +102,7 @@
     <div class="footer-wrapper container-fluid">
       <div class="row">
         <div class="col my-1">
-          <p class="m-0">Copyright &copy; iDev Semarang</p>
+          <p class="m-0"> {{config('idev.copyright','Copyright &copy; iDev Semarang')}} </p>
         </div>
       </div>
     </div>

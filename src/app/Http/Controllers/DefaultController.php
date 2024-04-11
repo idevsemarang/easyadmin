@@ -22,6 +22,8 @@ class DefaultController extends Controller
     protected $tableHeaders;
     protected $actionButtons;
     protected $importExcelConfig;
+    protected $importScripts = [];
+    protected $importStyles = [];
 
     public function index()
     {
@@ -61,6 +63,8 @@ class DefaultController extends Controller
             'easyadmin::backend.idev.buttons.import_default',
         ];
         $data['templateImportExcel'] = "#";
+        $data['import_scripts'] = $this->importScripts;
+        $data['import_styles'] = $this->importStyles;
 
         $layout = (request('from_ajax') && request('from_ajax') == true) ? 'easyadmin::backend.idev.list_drawer_ajax' : 'easyadmin::backend.idev.list_drawer';
 
