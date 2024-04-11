@@ -211,9 +211,14 @@ class DefaultController extends Controller
         DB::beginTransaction();
 
         try {
+            $appendStore = $this->appendStore($request);
+
             $insert = new $this->modelClass();
             foreach ($this->fields('create') as $key => $th) {
                 $insert->{$th['name']} = $request[$th['name']];
+            }
+            foreach ($appendStore['columns'] as $key => $as) {
+                $insert->{$as['name']} = $as['value'];
             }
             $insert->save();
 
@@ -232,6 +237,13 @@ class DefaultController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+
+    protected function appendStore($request){
+        return [
+            'columns' => []
+        ];
     }
 
 
@@ -273,9 +285,14 @@ class DefaultController extends Controller
         DB::beginTransaction();
 
         try {
+            $appendUpdate = $this->appendUpdate($request);
+
             $change = $this->modelClass::where('id', $id)->first();
             foreach ($this->fields('edit', $id) as $key => $th) {
                 $change->{$th['name']} = $request[$th['name']];
+            }
+            foreach ($appendUpdate['columns'] as $key => $as) {
+                $change->{$as['name']} = $as['value'];
             }
             $change->save();
 
@@ -296,6 +313,11 @@ class DefaultController extends Controller
         }
     }
 
+    protected function appendUpdate($request){
+        return [
+            'columns' => []
+        ];
+    }
 
     protected function exportPdf()
     {
