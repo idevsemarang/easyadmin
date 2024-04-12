@@ -7,23 +7,22 @@
     <div class="pc-content">
         <div class="page-header">
             <div class="page-block">
+                @if(isset($headerLayout))
+                    @include('backend.idev.parts.'.$headerLayout.'')
+                @else
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
                             <span class="count-total-list-{{$uri_key}} float-end mt-2">0 Data</span>
                         </div>
                         @if (in_array('create', $permissions))
-                        <a class="btn btn-secondary float-end text-white" data-bs-toggle="offcanvas" data-bs-target="#createForm-{{$uri_key}}">
+                        <a class="btn btn-secondary float-end text-white mx-1" data-bs-toggle="offcanvas" data-bs-target="#createForm-{{$uri_key}}">
                             Create
                         </a>
                         @endif
-                        <!-- <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../navigation/index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Sample Page</li>
-                    </ul> -->
                     </div>
                 </div>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -76,11 +75,11 @@
                                         $header_column = $header['column'];
                                         @endphp
                                         @if($header['order'])
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-nowrap">{{$header_name}}
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="white-space: nowrap;">{{$header_name}}
                                             <button class="btn btn-sm btn-link" onclick="orderBy('list-{{$uri_key}}','{{$header_column}}')"><i class="bi bi-arrow-up"></i></button>
                                         </th>
                                         @else
-                                        <th class="text-nowrap">{{$header_name}}
+                                        <th style="white-space: nowrap;">{{$header_name}}
                                         </th>
                                         @endif
                                         @endforeach

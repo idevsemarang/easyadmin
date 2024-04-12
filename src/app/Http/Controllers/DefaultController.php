@@ -24,6 +24,7 @@ class DefaultController extends Controller
     protected $importExcelConfig;
     protected $importScripts = [];
     protected $importStyles = [];
+    protected $pageHeaderLayout;
 
     public function index()
     {
@@ -45,9 +46,17 @@ class DefaultController extends Controller
             ],
         ];
 
+        $actionButtonViews = [
+            'easyadmin::backend.idev.buttons.delete', 
+            'easyadmin::backend.idev.buttons.edit', 
+            'easyadmin::backend.idev.buttons.show', 
+            'easyadmin::backend.idev.buttons.import_default',
+        ];
+
         // $permissions = (new Constant())->permissionByMenu($this->generalUri);
         $data['permissions'] = $this->arrPermissions;
         $data['more_actions'] = $moreActions;
+        $data['headerLayout'] = $this->pageHeaderLayout;
         $data['table_headers'] = $this->tableHeaders;
         $data['title'] = $this->title;
         $data['uri_key'] = $this->generalUri;
@@ -56,12 +65,7 @@ class DefaultController extends Controller
         $data['url_store'] = route($this->generalUri . '.store');
         $data['fields'] = $this->fields();
         $data['edit_fields'] = $this->fields();
-        $data['actionButtonViews'] = [
-            'easyadmin::backend.idev.buttons.delete', 
-            'easyadmin::backend.idev.buttons.edit', 
-            'easyadmin::backend.idev.buttons.show', 
-            'easyadmin::backend.idev.buttons.import_default',
-        ];
+        $data['actionButtonViews'] = $actionButtonViews;
         $data['templateImportExcel'] = "#";
         $data['import_scripts'] = $this->importScripts;
         $data['import_styles'] = $this->importStyles;

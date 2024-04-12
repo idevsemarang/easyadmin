@@ -102,7 +102,7 @@
     <div class="footer-wrapper container-fluid">
       <div class="row">
         <div class="col my-1">
-          <p class="m-0"> {{config('idev.copyright','Copyright &copy; iDev Semarang')}} </p>
+          <p class="m-0"> {!!config('idev.copyright','Copyright &copy; iDev Semarang') !!} </p>
         </div>
       </div>
     </div>
