@@ -24,7 +24,7 @@ class Constant
     $arrParent = [
       'list_access' => []
     ];
-    
+    $arrAccess = [];
     $kjs = Auth::user()->role->access;
 
     if ($kjs) {
@@ -40,7 +40,6 @@ class Constant
         }
       }
 
-
       $arrParent = [
         'list_access' => $arrAccess
       ];
@@ -54,6 +53,7 @@ class Constant
   {
 
     $kjs = Auth::user()->role->access;
+    $arrAccess = [];
 
     if ($kjs) {
       $accessJson = json_decode($kjs, true);
