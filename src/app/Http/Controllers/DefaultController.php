@@ -229,7 +229,11 @@ class DefaultController extends Controller
                 'validation_errors' => $messageErrors,
             ], 200);
         }
-        $this->beforeMainInsert($request);
+
+        $beforeInsertResponse = $this->beforeMainInsert($request);
+        if ($beforeInsertResponse !== null) {
+            return $beforeInsertResponse; // Return early if there's a response
+        }
 
         DB::beginTransaction();
 
@@ -256,11 +260,6 @@ class DefaultController extends Controller
             ], 200);
         } catch (Exception $e) {
             DB::rollBack();
-
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage(),
-            ], 500);
         }
     }
 
@@ -274,13 +273,13 @@ class DefaultController extends Controller
 
     protected function beforeMainInsert($request = null)
     {
-        return true;
+        return;
     }
 
 
     protected function afterMainInsert($insert = null, $request = null)
     {
-        return true;
+        return;
     }
 
 
@@ -319,7 +318,10 @@ class DefaultController extends Controller
             ], 200);
         }
 
-        $this->beforeMainUpdate($id, $request);
+        $beforeUpdateResponse = $this->beforeMainUpdate($id, $request);
+        if ($beforeUpdateResponse !== null) {
+            return $beforeUpdateResponse; // Return early if there's a response
+        }
 
         DB::beginTransaction();
 
@@ -363,15 +365,16 @@ class DefaultController extends Controller
 
     protected function beforeMainUpdate($id, $request = null)
     {
-        return true;
+        return;
     }
 
 
     protected function afterMainUpdate($change = null, $request = null)
     {
-        return true;
+        return;
     }
 
+    
     protected function exportPdf()
     {
         $dataQueries = $this->defaultDataQuery()->take(1000)->get();
