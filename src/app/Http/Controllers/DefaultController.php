@@ -64,7 +64,7 @@ class DefaultController extends Controller
         $data['uri_create'] = route($this->generalUri . '.create');
         $data['url_store'] = route($this->generalUri . '.store');
         $data['fields'] = $this->fields();
-        $data['edit_fields'] = $this->fields();
+        $data['edit_fields'] = $this->fields('edit');
         $data['actionButtonViews'] = $actionButtonViews;
         $data['templateImportExcel'] = "#";
         $data['import_scripts'] = $this->importScripts;
@@ -229,6 +229,7 @@ class DefaultController extends Controller
                 'validation_errors' => $messageErrors,
             ], 200);
         }
+        $this->beforeMainInsert($request);
 
         DB::beginTransaction();
 
@@ -243,6 +244,8 @@ class DefaultController extends Controller
                 $insert->{$as['name']} = $as['value'];
             }
             $insert->save();
+
+            $this->afterMainInsert($insert, $request);
 
             DB::commit();
 
@@ -266,6 +269,18 @@ class DefaultController extends Controller
         return [
             'columns' => []
         ];
+    }
+
+
+    protected function beforeMainInsert($request = null)
+    {
+        return true;
+    }
+
+
+    protected function afterMainInsert($insert = null, $request = null)
+    {
+        return true;
     }
 
 
@@ -304,6 +319,8 @@ class DefaultController extends Controller
             ], 200);
         }
 
+        $this->beforeMainUpdate($id, $request);
+
         DB::beginTransaction();
 
         try {
@@ -317,6 +334,8 @@ class DefaultController extends Controller
                 $change->{$as['name']} = $as['value'];
             }
             $change->save();
+
+            $this->afterMainUpdate($change, $request);
 
             DB::commit();
 
@@ -339,6 +358,18 @@ class DefaultController extends Controller
         return [
             'columns' => []
         ];
+    }
+
+
+    protected function beforeMainUpdate($id, $request = null)
+    {
+        return true;
+    }
+
+
+    protected function afterMainUpdate($change = null, $request = null)
+    {
+        return true;
     }
 
     protected function exportPdf()
