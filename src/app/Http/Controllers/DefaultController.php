@@ -90,10 +90,14 @@ class DefaultController extends Controller
     {
         $permission = $this->arrPermissions;// (new Constant)->permissionByMenu($this->generalUri);
         $eb = [];
-        $data_columns = [];
+        $dataColumns = [];
+        $dataColFormat = [];
         foreach ($this->tableHeaders as $key => $col) {
             if ($key > 0) {
-                $data_columns[] = $col['column'];
+                $dataColumns[] = $col['column'];
+                if (array_key_exists("formatting", $col)) {
+                    $dataColFormat[$col['column']] = $col['formatting'];
+                }
             }
         }
 
@@ -106,7 +110,8 @@ class DefaultController extends Controller
         $dataQueries = $this->defaultDataQuery()->paginate(10);
 
         $datas['extra_buttons'] = $eb;
-        $datas['data_columns'] = $data_columns;
+        $datas['data_columns'] = $dataColumns;
+        $datas['data_col_formatting'] = $dataColFormat;
         $datas['data_queries'] = $dataQueries;
         $datas['data_permissions'] = $permission;
         $datas['uri_key'] = $this->generalUri;
@@ -374,7 +379,7 @@ class DefaultController extends Controller
         return;
     }
 
-    
+
     protected function exportPdf()
     {
         $dataQueries = $this->defaultDataQuery()->take(1000)->get();

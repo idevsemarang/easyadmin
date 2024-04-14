@@ -136,12 +136,12 @@ function idevTable(formId, attrs = []) {
             var dataQueries = responses.data_queries;
             var dataColumns = responses.data_columns;
             var dataPermissions = responses.data_permissions;
+            var dataColFormat = responses.data_col_formatting;
             var extraButtons = responses.extra_buttons ?? [];
             var intActionCol = 0;
             if (dataQueries) {
                 $.each(dataQueries.data, function (key, item) {
                     var primaryKey = forcePrimary ? item[forcePrimary] : item.id;
-    
                     var numb =
                         1 +
                         key +
@@ -149,13 +149,8 @@ function idevTable(formId, attrs = []) {
                     htmlTable += "<tr>";
                     htmlTable += "<td>" + numb + "</td>";
                     $.each(dataColumns, function (key2, col) {
-                        var mItem = item[col] ? item[col] : "";
-                        if (mItem.length > 100) {
-                            mItem = mItem.substr(0,80)+"..."
-                        }
-                        if (typeof item[col] === "number") {
-                            mItem = item[col]
-                        }
+                        var mItem = formattingColumn(item[col], dataColFormat[col])
+
                         if (col == 'view_image') {
                             htmlTable += "<td><img class='img-thumbnail img-responsive' width='120px' src='"+mItem+"'></td>";
                         }else{
@@ -499,3 +494,27 @@ function checkboxAction(arrSavedInstance, params = {}) {
         var shouldCheckedAll = arrayContains && currentChecked.length > 0 && classSingleCb.length == currentChecked.length
         classAllCb.prop('checked', shouldCheckedAll)
 }
+
+// define your column formatting here
+function formattingColumn(item, dcf) {
+    var mItem = item ? item : "";
+
+    if (mItem.length > 100) {
+        mItem = mItem.substr(0,80)+"..."
+    }
+    if (typeof item === "number") {
+        mItem = item
+    }
+    if (dcf === "toRupiah") {
+        mItem = formatToRupiah(item)
+    }
+
+    return mItem
+}
+
+const formatToRupiah = (number)=>{
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    }).format(number);
+  }
