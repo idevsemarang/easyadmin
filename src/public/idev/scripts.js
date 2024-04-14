@@ -149,7 +149,7 @@ function idevTable(formId, attrs = []) {
                     htmlTable += "<tr>";
                     htmlTable += "<td>" + numb + "</td>";
                     $.each(dataColumns, function (key2, col) {
-                        var mItem = formattingColumn(item[col], dataColFormat[col])
+                        var mItem = formattingColumn(item, col, dataColFormat)
 
                         if (col == 'view_image') {
                             htmlTable += "<td><img class='img-thumbnail img-responsive' width='120px' src='"+mItem+"'></td>";
@@ -496,7 +496,9 @@ function checkboxAction(arrSavedInstance, params = {}) {
 }
 
 // define your column formatting here
-function formattingColumn(item, dcf) {
+function formattingColumn(items, col, dcfs) {
+    var dcf = dcfs[col]
+    var item = items[col]
     var mItem = item ? item : "";
 
     if (mItem.length > 100) {
