@@ -497,7 +497,7 @@ function checkboxAction(arrSavedInstance, params = {}) {
 
 // define your column formatting here
 function formattingColumn(items, col, dcfs) {
-    var dcf = dcfs[col]
+    var dcf = col ?? dcfs[col]
     var item = items[col]
     var mItem = item ? item : "";
 
