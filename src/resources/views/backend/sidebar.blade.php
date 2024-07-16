@@ -7,7 +7,7 @@
             <a class="pc-link 
                 @if(Route::has($menu['key'])) @if(strpos(URL::current(), route($menu['key'])) !==false ) active @endif @endif
                 @if(sizeof($menu['childrens']) > 0)
-                has-sub
+                sidebar-link
                 @endif" @if(sizeof($menu['childrens'])> 0)
                 href="#"
                 @else
@@ -22,7 +22,25 @@
                 <span class="pc-mtext">
                     {{$menu['name']}}
                 </span>
+                @if(sizeof($menu['childrens']) > 0)
+                <span class="pc-arrow">
+                    <i class="ti ti-chevron-right"></i>
+                </span>
+                @endif
             </a>
+
+            @if(sizeof($menu['childrens']) > 0)
+            <ul class="pc-submenu">
+            @foreach($menu['childrens'] as $key => $cm)
+                @if(isset($cm['visibility']) && $cm['visibility'])
+                <li class="pc-item">
+                    <a href="@if(Route::has($cm['key'])) {{route($cm['key'])}} @endif" class="pc-link">{{$cm['name']}}</a>
+                </li>
+                @endif
+            @endforeach
+            </ul>
+            @endif
+
         </li>
         @endif
         @endforeach
@@ -94,15 +112,5 @@
         document.title = url;
     }
 
-    // function updateFilter() {
-    //     console.log(uriKey);
-    //     var queryParam = $("#form-filter-list-"+uriKey).serialize();
-    //     var currentHrefPdf = $("#export-pdf").attr('data-base-url')
-    //     $("#export-pdf").attr('href', currentHrefPdf + "?" + queryParam)
-    //     var queryParam = $("#form-filter-list-"+uriKey).serialize();
-    //     var currentHrefExcel = $("#export-excel").attr('data-base-url')
-    //     $("#export-excel").attr('href', currentHrefExcel + "?" + queryParam)
-    //     idevTable("list-"+uriKey)
-    // }
 </script>
 @endpush
