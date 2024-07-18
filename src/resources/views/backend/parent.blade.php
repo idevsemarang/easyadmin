@@ -38,8 +38,8 @@
     <div class="m-header">
       {{ env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) }}
       <div class="pc-h-item">
-        <a href="#" class="pc-head-link head-link-secondary m-0" id="sidebar-hide">
-          <i class="ti ti-menu-2"></i>
+        <a href="#" class="pc-head-link head-link-secondary m-0 p-1 d-none d-lg-block" id="sidebar-hide">
+          <i class="ti ti-menu-2 m-1"></i>
         </a>
       </div>
     </div>
@@ -51,8 +51,8 @@
       <div class="ms-auto">
         <ul class="list-unstyled">
           <li class="pc-h-item header-mobile-collapse">
-            <a href="#" class="pc-head-link head-link-secondary ms-0" id="mobile-collapse">
-              <i class="ti ti-menu-2"></i>
+            <a href="#" class="pc-head-link head-link-secondary m-0 p-1 d-lg-none d-md-block" id="mobile-collapse">
+              <i class="ti ti-menu-2 m-1"></i>
             </a>
           </li>
           <li class="dropdown pc-h-item">
