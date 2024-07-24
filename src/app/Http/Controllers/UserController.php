@@ -422,7 +422,7 @@ class UserController extends Controller
         try {
 
             $attr['fileExcel'] = $fileExcel;
-            $attr['headers'] = collect($excelHeaders)->pluck('column')->toArray();
+            $attr['headers'] = $excelHeaders;
             $attr['primaryKeys'] = ['email'];
             $attr['model'] = User::class;
 

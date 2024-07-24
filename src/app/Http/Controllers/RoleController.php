@@ -381,7 +381,7 @@ class RoleController extends Controller
         try {
 
             $attr['fileExcel'] = $fileExcel;
-            $attr['headers'] = collect($excelHeaders)->pluck('column')->toArray();
+            $attr['headers'] = $excelHeaders;
             $attr['primaryKeys'] = ['name'];
             $attr['model'] = Role::class;
 
