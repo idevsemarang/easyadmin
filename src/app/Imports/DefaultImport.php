@@ -10,12 +10,14 @@ class DefaultImport
     private $fileExcel;
     private $columnSeparator;
     private $primaryKeys;
+    private $appendValues;
     private $model;
 
     public function __construct($attrs = [])
     {
         $this->fileExcel = $attrs['fileExcel'];
         $this->headers = $attrs['headers'];
+        $this->appendValues = $attrs['appendValues'] ?? [];
         $this->primaryKeys = $attrs['primaryKeys'];
         $this->columnSeparator = $attrs['columnSeparator'] ?? "_";
         $this->model = $attrs['model'];
@@ -74,7 +76,12 @@ class DefaultImport
                             $updateByCols[$this->headers[$key]['column']] = $cells[$ai]->getValue();
                         }
                     }
-
+                    if (sizeof($this->appendValues) > 0) {
+                        foreach ($this->appendValues as $key => $av) {
+                            $fields[$av['name']] = $av['value'];
+                        }
+                    }
+                    
                     $this->model::updateOrCreate($updateByCols, $fields);
                 }
             }
@@ -84,6 +91,7 @@ class DefaultImport
 
         unlink($filepath);
     }
+
 
 
     private function transformJson($value)
