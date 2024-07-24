@@ -18,12 +18,20 @@ Admin packages with easy crud, import and export datas
     },
    </pre>
  
-3. Add provider to config/app.php providers <br>
+3a. Add provider to config/app.php providers <br>
     <pre>
     'providers' => ServiceProvider::defaultProviders()->merge([
         .....
         Idev\EasyAdmin\EasyAdminServiceProvider::class,
     ])->toArray(),
+   </pre>
+
+3b. Add provider to bootstrap/providers.php providers (Laravel 11)<br>
+    <pre>
+    return [
+        ....
+        Idev\EasyAdmin\EasyAdminServiceProvider::class,
+    ];
    </pre>
 
 4. Run installation<br>
@@ -41,6 +49,12 @@ You can easily create your crud controller, let's enable command via app/Console
         ....
         \Idev\EasyAdmin\app\Console\Commands\ControllerMaker::class,
     ];
+</pre>
+In laravel 11 you should add command in bootstrap/app.php
+<pre>
+    ->withCommands([
+        Idev\EasyAdmin\app\Console\Commands\ControllerMaker::class,
+    ])
 </pre>
 make sure the table migration has been created
 then you just type: 
