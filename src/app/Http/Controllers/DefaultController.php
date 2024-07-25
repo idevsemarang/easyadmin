@@ -18,6 +18,7 @@ class DefaultController extends Controller
     protected $modelClass;
     protected $title;
     protected $generalUri;
+    protected $dynamicPermission = false;
     protected $arrPermissions = ['list','show', 'create', 'edit', 'delete', 'export-excel-default', 'export-pdf-default', 'import-excel-default'];
     protected $actionButtonViews = [
         'easyadmin::backend.idev.buttons.delete', 
@@ -55,9 +56,11 @@ class DefaultController extends Controller
             ],
         ];
 
-
-        // $permissions = (new Constant())->permissionByMenu($this->generalUri);
-        $data['permissions'] = $this->arrPermissions;
+        $permissions =  $this->arrPermissions;
+        if ($this->dynamicPermission) {
+            $permissions = (new Constant())->permissionByMenu($this->generalUri);
+        }
+        $data['permissions'] = $permissions;
         $data['more_actions'] = $moreActions;
         $data['headerLayout'] = $this->pageHeaderLayout;
         $data['table_headers'] = $this->tableHeaders;
@@ -91,7 +94,10 @@ class DefaultController extends Controller
 
     protected function indexApi()
     {
-        $permission = $this->arrPermissions;// (new Constant)->permissionByMenu($this->generalUri);
+        $permission =  $this->arrPermissions;
+        if ($this->dynamicPermission) {
+            $permission = (new Constant())->permissionByMenu($this->generalUri);
+        }
         $eb = [];
         $dataColumns = [];
         $dataColFormat = [];
