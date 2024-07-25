@@ -19,6 +19,12 @@ class DefaultController extends Controller
     protected $title;
     protected $generalUri;
     protected $arrPermissions = ['list','show', 'create', 'edit', 'delete', 'export-excel-default', 'export-pdf-default', 'import-excel-default'];
+    protected $actionButtonViews = [
+        'easyadmin::backend.idev.buttons.delete', 
+        'easyadmin::backend.idev.buttons.edit', 
+        'easyadmin::backend.idev.buttons.show', 
+        'easyadmin::backend.idev.buttons.import_default',
+    ];
     protected $tableHeaders;
     protected $actionButtons;
     protected $importExcelConfig;
@@ -49,12 +55,6 @@ class DefaultController extends Controller
             ],
         ];
 
-        $actionButtonViews = [
-            'easyadmin::backend.idev.buttons.delete', 
-            'easyadmin::backend.idev.buttons.edit', 
-            'easyadmin::backend.idev.buttons.show', 
-            'easyadmin::backend.idev.buttons.import_default',
-        ];
 
         // $permissions = (new Constant())->permissionByMenu($this->generalUri);
         $data['permissions'] = $this->arrPermissions;
@@ -68,7 +68,7 @@ class DefaultController extends Controller
         $data['url_store'] = route($this->generalUri . '.store');
         $data['fields'] = $this->fields();
         $data['edit_fields'] = $this->fields('edit');
-        $data['actionButtonViews'] = $actionButtonViews;
+        $data['actionButtonViews'] = $this->actionButtonViews;
         $data['templateImportExcel'] = "#";
         $data['import_scripts'] = $this->importScripts;
         $data['import_styles'] = $this->importStyles;
@@ -342,10 +342,8 @@ class DefaultController extends Controller
         DB::beginTransaction();
 
         try {
-            $appendUpdate = $this->appendUpdate($request);    
-            if (array_key_exists('error', $appendUpdate)) {
-                return response()->json($appendUpdate['error'], 200);
-            }
+            $appendUpdate = $this->appendUpdate($request);
+
             $change = $this->modelClass::where('id', $id)->first();
             foreach ($this->fields('edit', $id) as $key => $th) {
                 $change->{$th['name']} = $request[$th['name']];
