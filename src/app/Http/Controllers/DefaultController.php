@@ -247,6 +247,10 @@ class DefaultController extends Controller
 
         try {
             $appendStore = $this->appendStore($request);
+            
+            if (array_key_exists('error', $appendStore)) {
+                return response()->json($appendStore['error'], 200);
+            }
 
             $insert = new $this->modelClass();
             foreach ($this->fields('create') as $key => $th) {
@@ -268,6 +272,10 @@ class DefaultController extends Controller
             ], 200);
         } catch (Exception $e) {
             DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -334,8 +342,10 @@ class DefaultController extends Controller
         DB::beginTransaction();
 
         try {
-            $appendUpdate = $this->appendUpdate($request);
-
+            $appendUpdate = $this->appendUpdate($request);    
+            if (array_key_exists('error', $appendUpdate)) {
+                return response()->json($appendUpdate['error'], 200);
+            }
             $change = $this->modelClass::where('id', $id)->first();
             foreach ($this->fields('edit', $id) as $key => $th) {
                 $change->{$th['name']} = $request[$th['name']];
