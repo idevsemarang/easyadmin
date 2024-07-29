@@ -1,10 +1,12 @@
 <?php
 
-namespace Idev\EasyAdmin\app\Imports;
+namespace App\Imports;
 
+use Idev\EasyAdmin\app\Models\Role;
+use Illuminate\Support\Facades\Log;
 use OpenSpout\Reader\Common\Creator\ReaderFactory;
 
-class DefaultImport 
+class AnggotaImport 
 {
     private $headers;
     private $fileExcel;
@@ -34,18 +36,19 @@ class DefaultImport
         $reader->open($filepath);
 
         $allowedIndex = [];
-        $columnNameInDb = collect($this->headers)->pluck('name')->toArray();
-
+        $columnNameInExcel = collect($this->headers)->pluck('name')->toArray();
+        
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $hKey => $row) {
                 $cells = $row->getCells();
 
                 if ($hKey == 1) {
-                    foreach ($cells as $key => $cell) {
-                       // $formatCell = str_replace(" ", $this->columnSeparator, strtolower($cell));
-
-                        if (in_array($cell->getValue(), $columnNameInDb)) {
-                            $allowedIndex[] = $key;
+                    foreach ($columnNameInExcel as $key => $cnie) {
+                        foreach ($cells as $vKey => $cell) {
+                            // $formatCell = str_replace(" ", $this->columnSeparator, strtolower($cell));
+                            if ($cnie == $cell->getValue()) {
+                                $allowedIndex[] = $vKey;
+                            }
                         }
                     }
                 } else {
@@ -91,7 +94,6 @@ class DefaultImport
 
         unlink($filepath);
     }
-
 
 
     private function transformJson($value)
