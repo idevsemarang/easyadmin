@@ -2,6 +2,8 @@
 
 namespace Idev\EasyAdmin\app\Imports;
 
+use DateTimeImmutable;
+use Illuminate\Support\Facades\Log;
 use OpenSpout\Reader\Common\Creator\ReaderFactory;
 
 class DefaultImport 
@@ -35,7 +37,7 @@ class DefaultImport
 
         $allowedIndex = [];
         $columnNameInExcel = collect($this->headers)->pluck('name')->toArray();
-        
+
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $hKey => $row) {
                 $cells = $row->getCells();
@@ -60,10 +62,19 @@ class DefaultImport
                             $rel = $this->headers[$key]['relation'];
                             $mRelation = $rel['model']::where($rel['primary_attribute'], $cells[$ai]->getValue())->first();
                             $fields[$this->headers[$key]['column']] = ($mRelation) ? $mRelation->{$rel['primary_key']} : null;
+
                         }
+
                         if( array_key_exists('format', $this->headers[$key])){
                             if($this->headers[$key]['format'] == 'transformJson'){
                                 $fields[$this->headers[$key]['column']] = $this->transformJson($cells[$ai]->getValue());
+                            }
+                            if($this->headers[$key]['format'] == 'transformDateTime'){
+                                $dateFormat = "Y-m-d";
+                                if (array_key_exists('dateFormat', $this->headers[$key])) {
+                                    $dateFormat = $this->headers[$key]['dateFormat'];
+                                }
+                                $fields[$this->headers[$key]['column']] = $this->transformDateTime($cells[$ai]->getValue(), $dateFormat);
                             }
                         }
                         if( array_key_exists('relation_multi_value', $this->headers[$key])){
@@ -100,6 +111,18 @@ class DefaultImport
         $json = json_encode($arr);
 
         return $json;
+    }
+
+
+    private function transformDateTime($value, $format = "Y-m-d")
+    {
+        if ($value instanceof DateTimeImmutable) {
+            $arr = $value->format($format);
+        } else {
+            $arr = date($format, strtotime($value));
+        }
+
+        return $arr;
     }
 
 }
