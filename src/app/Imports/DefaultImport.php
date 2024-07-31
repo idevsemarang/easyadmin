@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Imports;
+namespace Idev\EasyAdmin\app\Imports;
 
-use Idev\EasyAdmin\app\Models\Role;
-use Illuminate\Support\Facades\Log;
 use OpenSpout\Reader\Common\Creator\ReaderFactory;
 
-class AnggotaImport 
+class DefaultImport 
 {
     private $headers;
     private $fileExcel;
