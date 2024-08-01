@@ -23,16 +23,16 @@
                     <form id="form-login" action="{{url('login')}}" method="post">
                         @csrf
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Email address / Username" />
+                            <input type="email" class="form-control" id="create_email" name="email" placeholder="Email address / Username" />
                             <label for="floatingInput">Email address / Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" name="password" placeholder="Password" />
+                            <input type="password" class="form-control" id="create_password" name="password" placeholder="Password" />
                             <label for="floatingInput">Password</label>
                         </div>
                         
                         <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-primary-idev" id="btn-for-form-login" onclick="submitAfterValid('form-login', '-login')">Sign In</button>
+                            <button type="button" class="btn btn-primary-idev" id="btn-for-form-login" onclick="submitAfterValid('form-login')">Sign In</button>
                         </div>
                     </form>
                 </div>
