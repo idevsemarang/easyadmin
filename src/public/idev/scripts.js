@@ -88,7 +88,7 @@ function messageErrorForm(currentID, message) {
 }
 
 function messageErrorGeneral(currentID, message, type = 'danger') {
-    $("<div class='error-message alert alert-"+type+" text-white'>" + message + "</div>")
+    $("<div class='error-message alert alert-"+type+" fw-bold'>" + message + "</div>")
         .insertBefore(currentID)
         .hide()
         .show("medium");

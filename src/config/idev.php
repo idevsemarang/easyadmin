@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'theme' => 'default', // available : default, greeny, monochrome
+    'theme' => 'default', // available : default, greeny, monochrome, bluesy
     'app_name' => 'iDev EasyAdmin',
     // 'app_logo' => asset('easyadmin/idev/img/logo-idev.png'),
     // 'app_favicon' => asset('easyadmin/idev/img/favicon.png'),
