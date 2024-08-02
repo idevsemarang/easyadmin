@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-@push('scripts')
+@push('fescripts')
 <script>
     var input = document.getElementById("create_password");
 

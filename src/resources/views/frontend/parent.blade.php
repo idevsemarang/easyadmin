@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('easyadmin/theme/'.config('idev.theme','default').'/css/style.css')}}" id="main-style-link" />
     <link rel="stylesheet" href="{{ asset('easyadmin/theme/'.config('idev.theme','default').'/css/style-preset.css')}}" id="preset-style-link" />
     <link href="{{ asset('easyadmin/idev/styles.css')}}" rel="stylesheet" />
+    @stack("festyles")
 </head>
 
 
@@ -40,6 +41,7 @@
     <script src="{{ asset('easyadmin/theme/default/js/config.js')}}"></script>
     <script src="{{ asset('easyadmin/theme/default/js/pcoded.js')}}"></script>
     <script src="{{ asset('easyadmin/idev/scripts.js')}}"></script>
+    @stack("fescripts")
 </body>
 
 </html>
