@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="{{ asset('easyadmin/theme/'.config('idev.theme','default').'/css/style.css')}}" id="main-style-link" />
   <link rel="stylesheet" href="{{ asset('easyadmin/theme/'.config('idev.theme','default').'/css/style-preset.css')}}" id="preset-style-link" />
   <link href="{{ asset('easyadmin/idev/styles.css')}}" rel="stylesheet" />
+  @foreach(config('idev.import_styles', []) as $item)
+    <link href="{{ $item }}" rel="stylesheet" />
+  @endforeach
 </head>
 
 
@@ -116,7 +119,9 @@
   <script src="{{ asset('easyadmin/theme/default/js/config.js')}}"></script>
   <script src="{{ asset('easyadmin/theme/default/js/pcoded.js')}}"></script>
   <script src="{{ asset('easyadmin/idev/scripts.js')}}"></script>
-
+  @foreach(config('idev.import_scripts', []) as $item)
+  <script src="{{ $item }}"></script>
+  @endforeach
   <div class="push-script-ajax">@stack("scripts")</div>
 
 </body>
