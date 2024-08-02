@@ -40,4 +40,16 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    var input = document.getElementById("create_password");
+
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            submitAfterValid('form-login')
+        }
+    });
+</script>
+@endpush
 @endsection
