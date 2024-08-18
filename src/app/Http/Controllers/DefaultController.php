@@ -210,8 +210,8 @@ class DefaultController extends Controller
     protected function flagRules($key, $id = null)
     {
         $required = false;
-        if(array_key_exists($key,$this->rules())){
-            $fieldRules = $this->rules()[$key];
+        if(array_key_exists($key,$this->rules($id))){
+            $fieldRules = $this->rules($id)[$key];
 
             if (is_array($fieldRules)) {
                 if (in_array('required', $fieldRules)) {
@@ -326,7 +326,7 @@ class DefaultController extends Controller
 
     protected function update(Request $request, $id)
     {
-        $rules = $this->rules();
+        $rules = $this->rules($id);
         
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
