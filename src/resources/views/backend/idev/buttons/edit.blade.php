@@ -49,6 +49,13 @@ function setEdit(id) {
            
             if (field.type == "onlyview") {
                 $('#edit_' + field.name).text(field.value)
+                if (field.options) {
+                    $.each(field.options, function(index, option) {
+                        if (option.value == field.value) {
+                            $('#edit_' + field.name).text(option.text)
+                        }
+                    })
+                }
             }
             else if (field.type == "image") {
                 $('.thumb_'+field.name).attr('src', field.value)
