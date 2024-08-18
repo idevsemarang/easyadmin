@@ -260,11 +260,16 @@ class DefaultController extends Controller
 
             $insert = new $this->modelClass();
             foreach ($this->fields('create') as $key => $th) {
-                $insert->{$th['name']} = $request[$th['name']];
+                if ($request[$th['name']]) {
+                    $insert->{$th['name']} = $request[$th['name']];
+                }
             }
-            foreach ($appendStore['columns'] as $key => $as) {
-                $insert->{$as['name']} = $as['value'];
+            if (array_key_exists('columns', $appendStore)) {
+                foreach ($appendStore['columns'] as $key => $as) {
+                    $insert->{$as['name']} = $as['value'];
+                }
             }
+
             $insert->save();
 
             $this->afterMainInsert($insert, $request);
@@ -352,11 +357,16 @@ class DefaultController extends Controller
 
             $change = $this->modelClass::where('id', $id)->first();
             foreach ($this->fields('edit', $id) as $key => $th) {
-                $change->{$th['name']} = $request[$th['name']];
+                if ($request[$th['name']]) {
+                    $change->{$th['name']} = $request[$th['name']];
+                }
             }
-            foreach ($appendUpdate['columns'] as $key => $as) {
-                $change->{$as['name']} = $as['value'];
+            if (array_key_exists('columns', $appendUpdate)) {
+                foreach ($appendUpdate['columns'] as $key => $as) {
+                    $change->{$as['name']} = $as['value'];
+                }
             }
+            
             $change->save();
 
             $this->afterMainUpdate($change, $request);
