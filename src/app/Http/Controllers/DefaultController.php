@@ -94,6 +94,13 @@ class DefaultController extends Controller
 
     protected function indexApi()
     {
+        $manyDatas = 10;
+        if (request('manydatas')) {
+            $manyDatas = request('manydatas');
+            if ($manyDatas == "All") {
+                $manyDatas = 10000; // we are using this boundaries to prevent lack of request
+            }
+        }
         $permission =  $this->arrPermissions;
         if ($this->dynamicPermission) {
             $permission = (new Constant())->permissionByMenu($this->generalUri);
@@ -116,7 +123,7 @@ class DefaultController extends Controller
             }
         }
 
-        $dataQueries = $this->defaultDataQuery()->paginate(10);
+        $dataQueries = $this->defaultDataQuery()->paginate($manyDatas);
 
         $datas['extra_buttons'] = $eb;
         $datas['data_columns'] = $dataColumns;

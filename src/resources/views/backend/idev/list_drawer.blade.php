@@ -49,6 +49,7 @@
                                                 <input type="hidden" name="route_name" class="route-name-{{$uri_key}}" value="{{$uri_key}}">
                                                 <input type="hidden" name="page" class="current-paginate-{{$uri_key}}">
                                                 <input type="hidden" name="order" class="current-order-{{$uri_key}}">
+                                                <input type="hidden" name="manydatas" class="current-manydatas-{{$uri_key}}" value="10">
                                                 <input type="hidden" name="order_state" class="current-order-state-{{$uri_key}}" value="ASC">
                                             </div>
                                         </div>
@@ -88,7 +89,18 @@
                                 </thead>
                                 <tbody></tbody>
                             </table>
-                            <div id="paginate-list-{{$uri_key}}" class="mt-4"></div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <select class="form-control form-control-sm" id="manydatas-show-{{$uri_key}}">
+                                        @foreach(['10', '20', '50', '100', 'All'] as $key => $showData)
+                                        <option value="{{$showData}}">{{$showData}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-11">
+                                    <div id="paginate-list-{{$uri_key}}"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -184,6 +196,11 @@
             updateFilter()
         }
     }, 500))
+
+    $("#manydatas-show-{{$uri_key}}").change(function(){
+        $(".current-manydatas-{{$uri_key}}").val($(this).val())
+        idevTable("list-{{$uri_key}}")
+    });
 
     function updateFilter() {
         var queryParam = $("#form-filter-list-{{$uri_key}}").serialize();
