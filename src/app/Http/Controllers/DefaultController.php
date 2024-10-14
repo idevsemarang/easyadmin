@@ -32,6 +32,7 @@ class DefaultController extends Controller
     protected $importScripts = [];
     protected $importStyles = [];
     protected $pageHeaderLayout;
+    protected $drawerLayout = null;
 
     public function index()
     {
@@ -60,6 +61,10 @@ class DefaultController extends Controller
         if ($this->dynamicPermission) {
             $permissions = (new Constant())->permissionByMenu($this->generalUri);
         }
+        $layout = (request('from_ajax') && request('from_ajax') == true) ? 'easyadmin::backend.idev.list_drawer_ajax' : 'easyadmin::backend.idev.list_drawer';
+        if(isset($this->drawerLayout)){
+            $layout = $this->drawerLayout;
+        }
         $data['permissions'] = $permissions;
         $data['more_actions'] = $moreActions;
         $data['headerLayout'] = $this->pageHeaderLayout;
@@ -77,8 +82,6 @@ class DefaultController extends Controller
         $data['import_styles'] = $this->importStyles;
         $data['import_styles'] = $this->importStyles;
         $data['filters'] = $this->filters();
-
-        $layout = (request('from_ajax') && request('from_ajax') == true) ? 'easyadmin::backend.idev.list_drawer_ajax' : 'easyadmin::backend.idev.list_drawer';
 
         return view($layout, $data);
     }
