@@ -18,15 +18,15 @@ Admin packages with easy crud, import and export datas
     },
    </pre>
  
-3a. Add provider to config/app.php providers <br>
+3. Add provider to config/app.php providers <br>
     <pre>
     'providers' => ServiceProvider::defaultProviders()->merge([
         .....
         Idev\EasyAdmin\EasyAdminServiceProvider::class,
     ])->toArray(),
    </pre>
-
-3b. Add provider to bootstrap/providers.php providers (Laravel 11)<br>
+   
+   For Laravel 11 you can use:<br>
     <pre>
     return [
         ....
