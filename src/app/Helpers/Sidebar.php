@@ -15,7 +15,11 @@ class Sidebar
 
     $arrMenu = [];
     foreach ($menus as $key => $menu) {
-      // $menu['visibility'] = in_array($menu['key'].".index", $permission['list_access']);
+      $visibilityMenu = in_array($menu['key'] . ".index", $permission['list_access']);
+      if (isset($menu['override_visibility'])) {
+        $visibilityMenu = $menu['override_visibility'];
+      }
+      $menu['visibility'] = $visibilityMenu;
       $menu['url'] = (Route::has($menu['key'].".index")) ? route($menu['key'].".index") : "#";
       $menu['base_key'] = $menu['key'];
       $menu['key'] = $menu['key'].".index";
