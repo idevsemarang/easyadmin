@@ -26,7 +26,7 @@ Admin packages with easy crud, import and export datas
     ])->toArray(),
    </pre>
    
-   For Laravel 11 you can use:<br>
+   For Laravel 11 you can add code below to bootstrap/providers.php:<br>
     <pre>
     return [
         ....
