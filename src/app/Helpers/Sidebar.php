@@ -12,6 +12,8 @@ class Sidebar
   public function generate()
   {    
     $menus = $this->menus();
+    $constant = new Constant();
+    $permission = $constant->permissions();
 
     $arrMenu = [];
     foreach ($menus as $key => $menu) {
