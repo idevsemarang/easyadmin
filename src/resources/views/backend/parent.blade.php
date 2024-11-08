@@ -58,11 +58,11 @@
               <i class="ti ti-menu-2 m-1"></i>
             </a>
           </li>
-          <li class="dropdown pc-h-item">
+          <!--li class="dropdown pc-h-item">
             <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
               <i class="ti ti-bell"></i>
             </a>
-          </li>
+          </li-->
           <li class="dropdown pc-h-item">
             <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
               <i class="ti ti-user"></i>
