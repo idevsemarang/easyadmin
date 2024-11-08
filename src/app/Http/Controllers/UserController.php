@@ -483,7 +483,12 @@ class UserController extends Controller
         $data['uri_key'] = $this->generalUri;
         $data['fields'] = $fields;
 
-        return view('easyadmin::backend.idev.myaccount', $data);
+        $layout = 'easyadmin::backend.idev.myaccount';
+        if (View::exists('backend.idev.myaccount')) {
+            $layout = 'backend.idev.myaccount';
+        }
+        
+        return view($layout, $data);
     }
 
 
