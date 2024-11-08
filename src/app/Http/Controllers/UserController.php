@@ -15,6 +15,7 @@ use Idev\EasyAdmin\app\Helpers\Constant;
 use Idev\EasyAdmin\app\Imports\DefaultImport;
 use Idev\EasyAdmin\app\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Throwable;
 
 class UserController extends Controller
