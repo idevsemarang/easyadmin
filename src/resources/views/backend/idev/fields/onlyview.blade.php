@@ -12,4 +12,9 @@ $preffix_method = (isset($method))? $method."_": "";
     @else
         <div class="form-control"> <span id="{{$preffix_method}}{{(isset($field['name']))?$field['name']:'id_'.$key}}">{{(isset($field['value']))?$field['value']:''}}</span> </div>
     @endif
+    <input 
+        type="hidden" 
+        id="{{$preffix_method}}{{(isset($field['name']))?$field['name']:'id_'.$key}}" 
+        name="{{(isset($field['name']))?$field['name']:'name_'.$key}}" 
+        value="{{(isset($field['value']))?$field['value']:''}}">
 </div>
