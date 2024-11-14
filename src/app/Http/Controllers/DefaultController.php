@@ -80,7 +80,6 @@ class DefaultController extends Controller
         $data['templateImportExcel'] = "#";
         $data['import_scripts'] = $this->importScripts;
         $data['import_styles'] = $this->importStyles;
-        $data['import_styles'] = $this->importStyles;
         $data['filters'] = $this->filters();
 
         return view($layout, $data);
