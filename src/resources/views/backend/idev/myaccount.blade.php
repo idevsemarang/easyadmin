@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-      <div class="col-4">
+      <div class="col-4 col-md-4 col-12">
         <div class="card mb-4">
           <div class="card-body p-3">
             <form id="form-maccount" action="{{url('update-profile')}}" method="post">
