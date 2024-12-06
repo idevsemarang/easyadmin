@@ -60,6 +60,9 @@ function setEdit(id) {
             else if (field.type == "image") {
                 $('.thumb_'+field.name).attr('src', field.value)
             }
+            else if (field.type == "upload") {
+                $('.fiu_'+field.name).attr('href', field.value)
+            }
             else if (field.type == "select2_ajax_multiple") {
                 var selected = [];
                 var initials = [];
