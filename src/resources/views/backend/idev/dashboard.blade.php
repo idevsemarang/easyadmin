@@ -11,8 +11,6 @@
         <div class="row align-items-center">
           <div class="col-md-12">
             Hi, <b>{{ Auth::user()->name }} </b> 
-            {{ env('PROJECT_NAME', config('idev.app_name','iDev EasyAdmin') ) }}
-
             @if(config('idev.enable_role',true))
             You are logged in as <i>{{ Auth::user()->role->name }}</i> 
             @endif
