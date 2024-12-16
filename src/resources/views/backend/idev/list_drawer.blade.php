@@ -90,7 +90,7 @@
                                 <tbody></tbody>
                             </table>
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-md-1 col-lg-1 col-2">
                                     <select class="form-control form-control-sm" id="manydatas-show-{{$uri_key}}">
                                         @foreach(['10', '20', '50', '100', 'All'] as $key => $showData)
                                         <option value="{{$showData}}">{{$showData}}</option>
