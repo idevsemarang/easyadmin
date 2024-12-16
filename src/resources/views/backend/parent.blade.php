@@ -39,7 +39,7 @@
 
   <header class="pc-header">
     <div class="m-header">
-      {{ env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) }}
+      {!! env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) !!}
       <div class="pc-h-item">
         <a href="#" class="pc-head-link head-link-secondary m-0 p-1 d-none d-lg-block" id="sidebar-hide">
           <i class="ti ti-menu-2 m-1"></i>
@@ -93,7 +93,7 @@
   <nav class="pc-sidebar">
     <div class="navbar-wrapper">
       <div class="m-header">
-        {{ env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) }}
+        {!! env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) !!}
       </div>
       @include('easyadmin::backend.sidebar')
     </div>
