@@ -19,18 +19,18 @@ $startValue = isset($filter['label'])?$filter['label']:'Label '.$key;
     <div class="row">
         <div class="col-md-6 pr-1">
             <small>{{$fName}} Start</small>
-            <input id="{{$preffix_method}}{{$select_id}}_start" name="{{$select_name}}_start" type="date" class="form-control" value="{{$startVal}}">
+            <input id="{{$preffix_method}}{{$select_id}}_monthstart" name="{{$select_name}}_start" type="month" class="form-control" value="{{$startVal}}">
         </div>
         <div class="col-md-6 pl-1">
-            <small>{{$fName}} Start</small> 
-            <input id="{{$preffix_method}}{{$select_id}}_end" name="{{$select_name}}_end" type="date" class="form-control" value="{{$endVal}}">
+            <small>{{$fName}} End</small>
+            <input id="{{$preffix_method}}{{$select_id}}_monthend" name="{{$select_name}}_end" type="month" class="form-control" value="{{$endVal}}">
         </div>
     </div>
 </div>
 
 @push('scripts')
 <script>
-$('#{{$select_id}}_end').on('change', function() {
+$('#{{$select_id}}_monthend').on('change', function() {
     updateFilter()        
 })
 </script>
