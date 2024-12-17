@@ -87,8 +87,14 @@ function messageErrorForm(currentID, message) {
         .show("medium");
 }
 
-function messageErrorGeneral(currentID, message, type = 'danger') {
-    $("<div class='error-message alert alert-"+type+" fw-bold'>" + message + "</div>")
+function messageErrorGeneral(currentID, message, type = "danger") {
+    $(
+        "<div class='error-message alert alert-" +
+            type +
+            "'>" +
+            message +
+            "</div>"
+    )
         .insertBefore(currentID)
         .hide()
         .show("medium");
@@ -102,21 +108,32 @@ function messageErrorGeneral(currentID, message, type = 'danger') {
     }, 6000);
 }
 
+let pubAttrs = {}
+let listCheckboxes = []
+
 function idevTable(formId, attrs = []) {
     var datastring = $("#form-filter-" + formId).serialize();
     var url = $("#form-filter-" + formId).attr("action");
+    var cbEnable = false
     if (attrs.url) {
-        url = attrs.url
+        url = attrs.url;
     }
+    if (attrs.cbEnabled) {
+        cbEnable = attrs.cbEnabled;
+    }
+    pubAttrs = attrs;
+
     var htmlTable = "Processing...";
     var idTable = "#table-" + formId;
     var paginateTable = "#paginate-" + formId;
     var routeKey = $(".route-name").val();
     $(idTable).css("opacity", "0.7");
     $("button").attr("disabled", "disabled");
-    $("<div class='idev-loading loading-table text-center' style='width:100%;'><img src='" +
-    baseUrl +
-    "/easyadmin/idev/img/loading-buffering.gif' width='28px'><br>Processing...</div>").insertAfter(idTable)
+    $(
+        "<div class='idev-loading loading-table text-center' style='width:100%;'><img src='" +
+            baseUrl +
+            "/easyadmin/idev/img/loading-buffering.gif' width='28px'><br>Processing...</div>"
+    ).insertAfter(idTable);
     // $(idTable).append(
     //     "<div class='idev-loading loading-table text-center' style='width:100%;'><img src='" +
     //         baseUrl +
@@ -141,70 +158,59 @@ function idevTable(formId, attrs = []) {
             var intActionCol = 0;
             if (dataQueries) {
                 $.each(dataQueries.data, function (key, item) {
-                    var primaryKey = forcePrimary ? item[forcePrimary] : item.id;
-    
+                    var primaryKey = forcePrimary
+                        ? item[forcePrimary]
+                        : item.id;
+
                     var numb =
                         1 +
                         key +
                         (dataQueries.current_page - 1) * dataQueries.per_page;
-
-                    if ($(window).width() <= 765) {
-                        $(idTable + " thead").html("");
-
-                        htmlTable += "<tr><td>";
-                        // htmlTable += "<td>" + numb + "</td>";
-                        $.each(dataColumns, function (key2, col) {  
-                            var mLabel = col.replace("_", " ").toUpperCase() 
-                            htmlTable += "<b>" + mLabel + " : </b><br>";
-
-                            var mItem = formattingColumn(item, col, dataColFormat)
-
-                            if (col == 'view_image') {
-                                htmlTable += "<div><img class='img-thumbnail img-responsive' width='120px' src='"+mItem+"'></div>";
-                            }else{
-                                htmlTable += "<div class='" +formId +"-"+primaryKey+"-" +col +"'>" + mItem +"</div>";
-                            }
-                        });
-                        htmlTable +=
-                            "<div class='col-action' style='white-space: nowrap;'>";
-                        $.each(extraButtons, function (key3, eb) {
-                            if (item[eb] && dataPermissions.includes(eb.replace("btn_", ""))) {
-                                htmlTable += item[eb];
-                                intActionCol++;
-                            }
-                        });
-                        htmlTable += "</div>";
-                        htmlTable += "</td></tr>";
-                    }else{
-                        htmlTable += "<tr>";
-                        htmlTable += "<td>" + numb + "</td>";
-                        $.each(dataColumns, function (key2, col) {                        
-                            var mItem = formattingColumn(item, col, dataColFormat)
-    
-                            if (col == 'view_image') {
-                                htmlTable += "<td><img class='img-thumbnail img-responsive' width='120px' src='"+mItem+"'></td>";
-                            }else{
-                                htmlTable += "<td class='" +formId +"-"+primaryKey+"-" +col +"'>" + mItem +"</td>";
-                            }
-                        });
-                        htmlTable +=
-                            "<td class='col-action' style='white-space: nowrap;'>";
-                        $.each(extraButtons, function (key3, eb) {
-                            if (item[eb] && dataPermissions.includes(eb.replace("btn_", ""))) {
-                                htmlTable += item[eb];
-                                intActionCol++;
-                            }
-                        });
-                        htmlTable += "</td>";
-                        htmlTable += "</tr>";
+                    htmlTable += "<tr>";
+                    if (cbEnable) {
+                        htmlTable += "<td><input type='checkbox' class='cb-"+formId+"' id='single-"+formId+"-"+primaryKey+"' value='"+primaryKey+"'></td>";
                     }
-                    
+                    htmlTable += "<td>" + numb + "</td>";
+                    $.each(dataColumns, function (key2, col) {
+                        var mItem = formattingColumn(item, col, dataColFormat);
+
+                        if (col == "view_image") {
+                            htmlTable +=
+                                "<td><img class='img-thumbnail img-responsive' width='120px' src='" +
+                                mItem +
+                                "'></td>";
+                        } else {
+                            htmlTable +=
+                                "<td class='" +
+                                formId +
+                                "-" +
+                                primaryKey +
+                                "-" +
+                                col +
+                                "'>" +
+                                mItem +
+                                "</td>";
+                        }
+                    });
+                    htmlTable +=
+                        "<td class='col-action' style='white-space: nowrap;'>";
+                    $.each(extraButtons, function (key3, eb) {
+                        if (
+                            item[eb] &&
+                            dataPermissions.includes(eb.replace("btn_", ""))
+                        ) {
+                            htmlTable += item[eb];
+                            intActionCol++;
+                        }
+                    });
+                    htmlTable += "</td>";
+                    htmlTable += "</tr>";
                 });
-    
+
                 $(".count-total-" + formId).text(
                     "Total Data : " + dataQueries.total
                 );
-    
+
                 $(idTable + " tbody").html(htmlTable);
                 $(idTable).css("opacity", "1");
                 $(paginateTable).html(
@@ -223,6 +229,10 @@ function idevTable(formId, attrs = []) {
             }
             $(".idev-loading").remove();
             $("button").removeAttr("disabled");
+
+            if (cbEnable) {
+                tableCheckboxManager(formId)
+            }
         },
         error: function (xhr, status, error) {
             $(".progress-loading").remove();
@@ -241,6 +251,44 @@ function idevTable(formId, attrs = []) {
             );
         },
     });
+}
+
+
+function tableCheckboxManager(uriKey){
+    $('#'+uriKey+"-cb-all").click(function(){
+        $('.cb-'+uriKey).prop('checked', jQuery(this).prop('checked'));
+
+        $( '.cb-'+uriKey ).each(function( index ) {
+            if ($(this).prop('checked')) {
+                listCheckboxes.push($(this).val())
+            }else{
+                listCheckboxes = listCheckboxes.filter(item => item !== $(this).val());                
+            }
+        });
+        sessionStorage.setItem("bulk_"+uriKey, JSON.stringify(listCheckboxes));
+    });
+
+    $('.cb-'+uriKey).click(function(){
+        if (!$(this).prop('checked')) {
+            $('#'+uriKey+"-cb-all").prop('checked', false);
+            listCheckboxes = listCheckboxes.filter(item => item !== $(this).val());
+        } else {
+            listCheckboxes.push($(this).val())
+            if ($('.cb-'+uriKey+':checked').length == $('.cb-'+uriKey).length) {
+                $('#'+uriKey+"-cb-all").prop('checked', true);
+            }
+        }
+        sessionStorage.setItem("bulk_"+uriKey, JSON.stringify(listCheckboxes));
+    });
+    
+    $.each(listCheckboxes, function( index, value ) {
+        $('#single-'+uriKey+"-"+value).prop('checked', true);
+    });
+
+    var checkingAllCb = $('.cb-'+uriKey+':checked').length == $('.cb-'+uriKey).length
+    $('#'+uriKey+"-cb-all").prop('checked', checkingAllCb);
+
+    sessionStorage.setItem("bulk_"+uriKey, JSON.stringify(listCheckboxes));
 }
 
 function generatePaginate(formId, current, pages) {
@@ -267,7 +315,7 @@ function generatePaginate(formId, current, pages) {
 
 function toPage(formId, page) {
     $(".current-paginate-" + formId.replace("list-", "")).val(page);
-    idevTable(formId);
+    idevTable(formId, pubAttrs);
 }
 
 function orderBy(formId, column) {
@@ -279,7 +327,7 @@ function orderBy(formId, column) {
         $(mClass).val("ASC");
     }
     $(".current-order-" + formId.replace("list-", "")).val(column);
-    idevTable(formId);
+    idevTable(formId, pubAttrs);
 }
 
 function delay(callback, ms) {
@@ -380,19 +428,23 @@ function softSubmit(formId, reloadList, callback = false) {
             $(".progress-loading").remove();
             $("#btn-for-" + formId).html(initText);
             if (callback != false) {
-                callback()
-            }else{
+                callback();
+            } else {
                 if (response.status) {
                     $(".modal").modal("hide");
                     $(".btn-close").click();
-                    idevTable(reloadList);
+                    idevTable(reloadList, pubAttrs);
                     alertSwal("success", response.message);
                 } else {
-                    var typeAlert = 'danger'
+                    var typeAlert = "danger";
                     if (response.alert) {
-                        typeAlert = response.alert
+                        typeAlert = response.alert;
                     }
-                    messageErrorGeneral("#" + formId, response.message, typeAlert);
+                    messageErrorGeneral(
+                        "#" + formId,
+                        response.message,
+                        typeAlert
+                    );
                     if (massError && response.mass_errors) {
                         $(".modal").modal("hide");
                         $("#massError-" + formId).modal("show");
@@ -408,15 +460,19 @@ function softSubmit(formId, reloadList, callback = false) {
                         $(".tbody-errors").html(htmlTable);
                         $("#supportDtCust").DataTable();
                     } else {
-                        $.each(response.validation_errors, function (index, error) {
-                            var currentID = $("#" + error.id + suffixID);
-                            $(currentID).css({ border: "1px solid #c74266" });
-                            messageErrorForm(currentID, error.message);
-                        });
+                        $.each(
+                            response.validation_errors,
+                            function (index, error) {
+                                var currentID = $("#" + error.id + suffixID);
+                                $(currentID).css({
+                                    border: "1px solid #c74266",
+                                });
+                                messageErrorForm(currentID, error.message);
+                            }
+                        );
                     }
                 }
             }
-            
         },
         error: function (xhr, status, error) {
             $("#btn-for-" + formId).html(initText);
@@ -457,98 +513,134 @@ function alertSwal(type, message) {
     });
 }
 
-
 function checkboxAction(arrSavedInstance, params = {}) {
-    var classSingleCb = $(params.classSingleCb)
-    var classAllCb = $(params.classAllCb)
-    var inputHidden = $(params.inputHidden)
-    classAllCb.prop('checked', false)
+    var classSingleCb = $(params.classSingleCb);
+    var classAllCb = $(params.classAllCb);
+    var inputHidden = $(params.inputHidden);
+    classAllCb.prop("checked", false);
 
-    var currentChecked = []
-        // check initial checkboxes
-        $.each(classSingleCb, function (j, dt) {
+    var currentChecked = [];
+    // check initial checkboxes
+    $.each(classSingleCb, function (j, dt) {
+        const index = arrSavedInstance.indexOf($(this).val());
+        if (index > -1) {
+            $(dt).prop("checked", true);
+            currentChecked.push($(this).val());
+        }
+    });
+
+    // handle for single checkbox
+    classSingleCb.click(function () {
+        var isChecked = $(this).prop("checked");
+        if (isChecked) {
+            arrSavedInstance.push($(this).val());
+            currentChecked.push($(this).val());
+        } else {
             const index = arrSavedInstance.indexOf($(this).val());
+            const index2 = currentChecked.indexOf($(this).val());
             if (index > -1) {
-                $(dt).prop('checked', true)
-                currentChecked.push($(this).val())
+                arrSavedInstance.splice(index, 1);
             }
+            if (index2 > -1) {
+                currentChecked.splice(index2, 1);
+            }
+        }
+        inputHidden.val(JSON.stringify(arrSavedInstance));
+        const arrayContains = currentChecked.every((element) => {
+            return arrSavedInstance.includes(element);
         });
 
-        // handle for single checkbox
-        classSingleCb.click(function() {
-            var isChecked = $(this).prop('checked')
-            if (isChecked) {
-                arrSavedInstance.push($(this).val())
-                currentChecked.push($(this).val())
-            } else {
+        var shouldCheckedAll =
+            arrayContains &&
+            currentChecked.length > 0 &&
+            classSingleCb.length == currentChecked.length;
+        classAllCb.prop("checked", shouldCheckedAll);
+    });
+
+    // handle for multiple checkbox
+    classAllCb.click(function () {
+        var isChecked = $(this).prop("checked");
+        currentChecked = [];
+
+        if (isChecked) {
+            $.each(classSingleCb, function (j, dt) {
                 const index = arrSavedInstance.indexOf($(this).val());
-                const index2 = currentChecked.indexOf($(this).val());
-                if (index > -1) {
-                    arrSavedInstance.splice(index, 1)
+                if (index == -1) {
+                    arrSavedInstance.push($(this).val());
+                    currentChecked.push($(this).val());
                 }
-                if (index2 > -1) {
-                    currentChecked.splice(index2, 1)
-                }
-            }
-            inputHidden.val(JSON.stringify(arrSavedInstance))
-            const arrayContains = currentChecked.every(element => {
-                return arrSavedInstance.includes(element);
-              });
-    
-            var shouldCheckedAll = arrayContains && currentChecked.length > 0 && classSingleCb.length == currentChecked.length
-            classAllCb.prop('checked', shouldCheckedAll)
-        })
+            });
+        } else {
+            arrSavedInstance = [];
+        }
+        classSingleCb.prop("checked", isChecked);
+        inputHidden.val(JSON.stringify(arrSavedInstance));
+    });
 
-        // handle for multiple checkbox
-        classAllCb.click(function() {
-            var isChecked = $(this).prop('checked')
-            currentChecked = []
+    const arrayContains = currentChecked.every((element) => {
+        return arrSavedInstance.includes(element);
+    });
 
-            if (isChecked) {
-                $.each(classSingleCb, function (j, dt) {
-                    const index = arrSavedInstance.indexOf($(this).val());
-                    if (index == -1) {
-                        arrSavedInstance.push($(this).val())
-                        currentChecked.push($(this).val())
-                    }
-                });
-            }else{
-                arrSavedInstance = []
-            }
-            classSingleCb.prop('checked', isChecked)
-            inputHidden.val(JSON.stringify(arrSavedInstance))
-        })
-
-        const arrayContains = currentChecked.every(element => {
-            return arrSavedInstance.includes(element);
-          });
-
-        var shouldCheckedAll = arrayContains && currentChecked.length > 0 && classSingleCb.length == currentChecked.length
-        classAllCb.prop('checked', shouldCheckedAll)
+    var shouldCheckedAll =
+        arrayContains &&
+        currentChecked.length > 0 &&
+        classSingleCb.length == currentChecked.length;
+    classAllCb.prop("checked", shouldCheckedAll);
 }
 
 // define your column formatting here
 function formattingColumn(items, col, dcfs) {
-    var dcf = (dcfs) ? dcfs[col] : ""
-    var item = items[col]
+    var dcf = dcfs ? dcfs[col] : "";
+    var item = items[col];
     var mItem = item ? item : "";
 
     if (mItem.length > 100) {
-        mItem = mItem.substr(0,80)+"..."
+        mItem = mItem.substr(0, 80) + "...";
     }
     if (typeof item === "number") {
-        mItem = item
+        mItem = item;
     }
     if (dcf === "toRupiah") {
-        mItem = formatToRupiah(item)
+        mItem = formatToRupiah(item);
     }
 
-    return mItem
+    return mItem;
 }
 
-const formatToRupiah = (number)=>{
+const formatToRupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR"
+        style: "currency",
+        currency: "IDR",
     }).format(number);
-  }
+};
+
+function showDetailPage(route, mClass, heightSkeleton = 10) {
+    $(mClass).html(skeleton(heightSkeleton));
+    $(mClass).css("filter", "blur(2px)");
+
+    $.get(route)
+        .done(function (responses) {
+            $(mClass).html(responses);
+        })
+        .fail(function () {
+            $(mClass).html("<p>Internal Server Error</p>");
+        })
+        .always(function () {
+            $(mClass).css("filter", "blur(0px)");
+        });
+}
+
+function skeleton(heightSkeleton) {
+    const randItems = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+
+    var mHtml = "";
+    for (let index = 2; index <= randItems; index++) {
+        const randWidth = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
+        mHtml +=
+            "<div style='width:" +
+            randWidth +
+            "%; height:"+heightSkeleton+"px; background:silver; margin:4px;'></div>";
+    }
+
+    return mHtml;
+}
