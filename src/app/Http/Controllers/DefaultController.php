@@ -33,7 +33,8 @@ class DefaultController extends Controller
     protected $importStyles = [];
     protected $pageHeaderLayout;
     protected $drawerLayout = null;
-
+    protected $extendPermissions = [];
+    
     public function index()
     {
         $baseUrlExcel = route($this->generalUri.'.export-excel-default');
@@ -81,7 +82,7 @@ class DefaultController extends Controller
         $data['import_scripts'] = $this->importScripts;
         $data['import_styles'] = $this->importStyles;
         $data['filters'] = $this->filters();
-
+        
         return view($layout, $data);
     }
 
@@ -106,6 +107,9 @@ class DefaultController extends Controller
         $permission =  $this->arrPermissions;
         if ($this->dynamicPermission) {
             $permission = (new Constant())->permissionByMenu($this->generalUri);
+        }
+        foreach ($this->extendPermissions as $keyE => $ep) {
+            $permission[] = $ep;
         }
         $eb = [];
         $dataColumns = [];

@@ -81,3 +81,36 @@
     color: #ffffff;
     opacity: 0.8;
 }
+
+.summary-section{
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+}
+
+.col-divide-5{
+    border: 2px solid #ffffff;
+    padding: 6px;
+    width: 20%;
+    border-radius: 8px;
+    background: #dbeaeb;
+    text-align: center;
+}
+
+@media (max-width: 960px) {
+    .col-divide-5{
+        width: 25%;
+    }
+}
+
+@media (max-width: 760px) {
+    .col-divide-5{
+        width: 33%;
+    }
+}
+
+@media (max-width: 560px) {
+    .col-divide-5{
+        width: 50%;
+    }
+}

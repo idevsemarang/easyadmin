@@ -166,45 +166,76 @@ function idevTable(formId, attrs = []) {
                         1 +
                         key +
                         (dataQueries.current_page - 1) * dataQueries.per_page;
-                    htmlTable += "<tr>";
-                    if (cbEnable) {
-                        htmlTable += "<td><input type='checkbox' class='cb-"+formId+"' id='single-"+formId+"-"+primaryKey+"' value='"+primaryKey+"'></td>";
-                    }
-                    htmlTable += "<td>" + numb + "</td>";
-                    $.each(dataColumns, function (key2, col) {
-                        var mItem = formattingColumn(item, col, dataColFormat);
+                    
+                    if ($(window).width() <= 765) {
+                        $(idTable + " thead").html("");
+                        $(idTable).addClass("table-striped");
 
-                        if (col == "view_image") {
-                            htmlTable +=
-                                "<td><img class='img-thumbnail img-responsive' width='120px' src='" +
-                                mItem +
-                                "'></td>";
-                        } else {
-                            htmlTable +=
-                                "<td class='" +
-                                formId +
-                                "-" +
-                                primaryKey +
-                                "-" +
-                                col +
-                                "'>" +
-                                mItem +
-                                "</td>";
+                        htmlTable += "<tr><td>";
+                        // htmlTable += "<td>" + numb + "</td>";
+                        $.each(dataColumns, function (key2, col) {  
+                            var mLabel = col.replace("_", " ").toUpperCase() 
+                            htmlTable += "<b>" + mLabel + " : </b><br>";
+
+                            var mItem = formattingColumn(item, col, dataColFormat)
+
+                            if (col == 'view_image') {
+                                htmlTable += "<div><img class='img-thumbnail img-responsive' width='120px' src='"+mItem+"'></div>";
+                            }else{
+                                htmlTable += "<div class='" +formId +"-"+primaryKey+"-" +col +"'>" + mItem +"</div>";
+                            }
+                        });
+                        htmlTable +=
+                            "<div class='col-action' style='white-space: nowrap;'>";
+                        $.each(extraButtons, function (key3, eb) {
+                            if (item[eb] && dataPermissions.includes(eb.replace("btn_", ""))) {
+                                htmlTable += item[eb];
+                                intActionCol++;
+                            }
+                        });
+                        htmlTable += "</div>";
+                        htmlTable += "</td></tr>";
+                    }else{
+                        htmlTable += "<tr>";
+                        if (cbEnable) {
+                            htmlTable += "<td><input type='checkbox' class='cb-"+formId+"' id='single-"+formId+"-"+primaryKey+"' value='"+primaryKey+"'></td>";
                         }
-                    });
-                    htmlTable +=
-                        "<td class='col-action' style='white-space: nowrap;'>";
-                    $.each(extraButtons, function (key3, eb) {
-                        if (
-                            item[eb] &&
-                            dataPermissions.includes(eb.replace("btn_", ""))
-                        ) {
-                            htmlTable += item[eb];
-                            intActionCol++;
-                        }
-                    });
-                    htmlTable += "</td>";
-                    htmlTable += "</tr>";
+                        htmlTable += "<td>" + numb + "</td>";
+                        $.each(dataColumns, function (key2, col) {
+                            var mItem = formattingColumn(item, col, dataColFormat);
+    
+                            if (col == "view_image") {
+                                htmlTable +=
+                                    "<td><img class='img-thumbnail img-responsive' width='120px' src='" +
+                                    mItem +
+                                    "'></td>";
+                            } else {
+                                htmlTable +=
+                                    "<td class='" +
+                                    formId +
+                                    "-" +
+                                    primaryKey +
+                                    "-" +
+                                    col +
+                                    "'>" +
+                                    mItem +
+                                    "</td>";
+                            }
+                        });
+                        htmlTable +=
+                            "<td class='col-action' style='white-space: nowrap;'>";
+                        $.each(extraButtons, function (key3, eb) {
+                            if (
+                                item[eb] &&
+                                dataPermissions.includes(eb.replace("btn_", ""))
+                            ) {
+                                htmlTable += item[eb];
+                                intActionCol++;
+                            }
+                        });
+                        htmlTable += "</td>";
+                        htmlTable += "</tr>";
+                    }
                 });
 
                 $(".count-total-" + formId).text(
