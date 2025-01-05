@@ -38,7 +38,7 @@
 
 
   <header class="pc-header">
-    <div class="m-header">
+    <div class="m-header d-none d-lg-block">
       {!! env('PROJECT_NAME', config('idev.app_name','iDev Admin') ) !!}
       <div class="pc-h-item">
         <a href="#" class="pc-head-link head-link-secondary m-0 p-1 d-none d-lg-block" id="sidebar-hide">
