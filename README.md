@@ -59,8 +59,13 @@ In laravel 11 you should add command in bootstrap/app.php
 make sure the table migration has been created
 then you just type: 
 <pre>
-    php artisan idev:controller-maker --slug={your-route} --table={your-table}
+    php artisan idev:controller-maker --slug=your-route --table=your_table
 </pre>
+for example you have database master_products and you want to access this page with route /master-product, so should do artisan like this:
+<pre>
+    php artisan idev:controller-maker --slug=master-product --table=master_products
+</pre>
+
 
 ## Middleware CRUD (Optional)
 We also prepare middleware for access control in your crud by adding snippet code below into kernel.php  <br>
