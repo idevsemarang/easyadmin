@@ -22,7 +22,7 @@ $startValue = isset($filter['label'])?$filter['label']:'Label '.$key;
             <input id="{{$preffix_method}}{{$select_id}}_start" name="{{$select_name}}_start" type="date" class="form-control" value="{{$startVal}}">
         </div>
         <div class="col-md-6 pl-1">
-            <small>{{$fName}} Start</small> 
+            <small>{{$fName}} End</small> 
             <input id="{{$preffix_method}}{{$select_id}}_end" name="{{$select_name}}_end" type="date" class="form-control" value="{{$endVal}}">
         </div>
     </div>
