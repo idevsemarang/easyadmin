@@ -20,7 +20,6 @@
         const btn = document.getElementById('sh_{{$passFormId}}');
         btn.addEventListener('click', function() {
             const input = document.getElementById(this.getAttribute('data-target'));
-            console.log(input);
 
             if (input.type === 'password') {
                 input.type = 'text';

@@ -134,11 +134,6 @@ function idevTable(formId, attrs = []) {
             baseUrl +
             "/easyadmin/idev/img/loading-buffering.gif' width='28px'><br>Processing...</div>"
     ).insertAfter(idTable);
-    // $(idTable).append(
-    //     "<div class='idev-loading loading-table text-center' style='width:100%;'><img src='" +
-    //         baseUrl +
-    //         "/idev/img/loading-buffering.gif' width='34px'><br>Processing...</div>"
-    // );
     $(".count-total").text("");
 
     $.ajax({
@@ -517,13 +512,6 @@ function softSubmit(formId, reloadList, callback = false) {
         },
     });
 }
-
-// $("#multiple-select")
-//     .mobiscroll()
-//     .select({
-//         inputElement: document.getElementById("my-input"),
-//         touchUi: false,
-//     });
 
 function alertSwal(type, message) {
     const Toast = Swal.mixin({
