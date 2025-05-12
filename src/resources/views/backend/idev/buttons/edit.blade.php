@@ -1,7 +1,7 @@
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
     id="drawerEdit">
-    <div class="offcanvas-header bg-secondary">
-        <h5 class="text-white">Edit</h5>
+   <div class="offcanvas-header bg-primary p-4">
+        <h5 class="text-white m-0">Edit</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">

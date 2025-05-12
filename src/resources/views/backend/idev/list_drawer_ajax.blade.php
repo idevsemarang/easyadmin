@@ -93,8 +93,8 @@
 @push('scripts')
 <div class="push-script">
     <div class="offcanvas offcanvas-end" tabindex="-1" id="createForm-{{$uri_key}}" aria-labelledby="createForm-{{$uri_key}}">
-        <div class="offcanvas-header bg-themes">
-            <h5 class="text-white">Create New</h5>
+        <div class="offcanvas-header border-bottom bg-primary p-4">
+            <h5 class="text-white m-0">Create New</h5>
             <button type="button" class="btn-close text-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
