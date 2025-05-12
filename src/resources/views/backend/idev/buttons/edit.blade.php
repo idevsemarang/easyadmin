@@ -1,6 +1,6 @@
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1"
     id="drawerEdit">
-   <div class="offcanvas-header bg-primary p-4">
+    <div class="offcanvas-header bg-secondary p-4">
         <h5 class="text-white m-0">Edit</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -91,6 +91,17 @@ function setEdit(id) {
                 $('#edit_' + field.name).val(selected).trigger('change')
                 $('.s2-' + field.name + ' select').val(selected).trigger('change')
             }
+            else if (field.type == "checkbox") {
+                $('#edit_' + field.name).val(field.value)
+                $('#edit_' + field.name).prop("checked", field.value)
+            }
+            else if (field.type == "radio") {
+                $.each(field.options, function(index, option) {
+                    if (option.value == field.value) {
+                        $('#edit_' + field.name + "_" + index).prop("checked", true)
+                    }
+                });
+            }
             else if (field.type == "group_checklist") {
                 var htmlCl = ""
                 $.each(field.checklists, function(index, cl) {
@@ -119,6 +130,7 @@ function setEdit(id) {
                     $('.edit_repeatable-sections').html(arrClone)
 
                     $('.edit_repeatable-sections .row:last()').attr('id', 'edit_repeatable-'+index)
+                    // $('.edit_repeatable-sections').append(cloneElement);
                     arrClone.push(cloneElement.clone())
                     $.each(field.html_fields, function(index2, hf) {
                         $("#edit_repeatable-"+index+" #edit_" + hf.name).val(jv[hf.name])

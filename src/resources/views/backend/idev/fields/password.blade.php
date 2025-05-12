@@ -1,6 +1,7 @@
 @php
     $preffix_method = isset($method) ? $method . '_' : '';
-    $passFormId = $preffix_method . (isset($field['name']) ? $field['name'] : 'id_' . $key);
+    $passFormId = (isset($field['name']) ? $field['name'] : 'id_' . $key);
+    $passFormId = $preffix_method . $passFormId;
 @endphp
 
 <div class="{{ isset($field['class']) ? $field['class'] : 'form-group' }}">
@@ -20,6 +21,7 @@
         const btn = document.getElementById('sh_{{$passFormId}}');
         btn.addEventListener('click', function() {
             const input = document.getElementById(this.getAttribute('data-target'));
+            console.log(input);
 
             if (input.type === 'password') {
                 input.type = 'text';

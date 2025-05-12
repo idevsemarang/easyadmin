@@ -3,7 +3,8 @@ $prefix_repeatable = (isset($repeatable))? true : false;
 $ajaxUrl = $field['ajax_url'];
 $select2Ajax_name = (isset($field['name']))?$field['name']:'name_'.$key;
 $preffix_method = (isset($method))? $method."_": "";
-$select2AjaxFormid = $preffix_method . (isset($field['name']))?$field['name']:'id_'.$key;
+$select2AjaxFormid = (isset($field['name']))?$field['name']:'id_'.$key;
+$select2AjaxFormid = $preffix_method . $select2AjaxFormid;
 
 @endphp
 <div class="{{(isset($field['class']))?$field['class']:'form-group'}}">
@@ -38,7 +39,6 @@ $select2AjaxFormid = $preffix_method . (isset($field['name']))?$field['name']:'i
             cache: true
         }
     });
-
 </script>
 
 
