@@ -78,8 +78,6 @@ function checkCount() {
     }  else{
         $(".check-all").prop('checked', false)
     }
-    console.log(countChecked);
-    console.log(countCheckbox);
 }
 </script>
 

@@ -74,4 +74,14 @@ class Sidebar
     return ['list', 'create','show', 'edit', 'delete','import-excel-default', 'export-excel-default','export-pdf-default'];
   }
 
+
+  public function accessCustomize($menuKey)
+  {
+    $arrMenu = [
+      'dashboard' => ['list'],
+    ];
+
+    return $arrMenu[$menuKey] ?? $this->defaultAllAccess();
+  }
+
 }

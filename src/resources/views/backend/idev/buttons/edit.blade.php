@@ -102,7 +102,7 @@ function setEdit(id) {
                         var isChecked = cb.enable ? "checked" : ""
                         var accessName = cb.name.replaceAll("-", " ")
                         htmlCl += "<div class='col-md-6'>"
-                        htmlCl += "<input type='checkbox' class='cb-edit_"+field.name+"' name='"+field.name+"["+cl.label+"][]' value='"+cb.name+"' "+isChecked+"> <small> "+accessName+"</small>"
+                        htmlCl += "<input type='checkbox' class='cb-edit_"+field.name+"' name='"+field.name+"["+cl.key+"][]' value='"+cb.name+"' "+isChecked+"> <small> "+accessName+"</small>"
                         htmlCl += "</div>"
                     });
                     htmlCl += "</div>"
@@ -119,7 +119,6 @@ function setEdit(id) {
                     $('.edit_repeatable-sections').html(arrClone)
 
                     $('.edit_repeatable-sections .row:last()').attr('id', 'edit_repeatable-'+index)
-                    // $('.edit_repeatable-sections').append(cloneElement);
                     arrClone.push(cloneElement.clone())
                     $.each(field.html_fields, function(index2, hf) {
                         $("#edit_repeatable-"+index+" #edit_" + hf.name).val(jv[hf.name])

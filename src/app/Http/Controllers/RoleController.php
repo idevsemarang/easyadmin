@@ -174,10 +174,27 @@ class RoleController extends Controller
         $allSidebars = $sidebars->menus();
         $arrAkses = [];
         foreach ($allSidebars as $key => $as) {
-            $arrAkses[] = [
-                'route' => $as['key'],
-                'access' => $sidebars->defaultAllAccess()
-            ];
+            if (sizeof($as['childrens']) == 0) {
+                $arrAkses[] = [
+                    'label' => $as['name'],
+                    'route' => $as['key'],
+                    'access' => $sidebars->accessCustomize($as['key'])
+                ];
+            }else{
+                $arrAkses[] = [
+                    'label' => $as['name'],
+                    'route' => $as['key'],
+                    'access' => ['list']
+                ];
+            }
+            
+            foreach($as['childrens'] as $key => $cm){
+                $arrAkses[] = [
+                    'label' => $cm['name'],
+                    'route' => str_replace('.index', '',$cm['key']),
+                    'access' => $sidebars->accessCustomize($as['key'])
+                ];
+            }
         }
 
         $colAccessSource = collect($arrAkses);
@@ -206,7 +223,8 @@ class RoleController extends Controller
                 ];
             }
             $checklists[] = [
-                'label' => $cas['route'], 
+                'key' => $cas['route'], 
+                'label' => $cas['label'], 
                 'checkbox' => $accessCheck
             ];
         }
