@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    private $title;
-    private $generalUri;
+    protected $title;
+    protected $generalUri;
 
-    public function __construct()
+    protected function __construct()
     {
         $this->title = 'Login';
         $this->generalUri = 'login';
     }
 
 
-    public function login()
+    protected function login()
     {
         if(Auth::user()){
             return redirect()->route('dashboard.index');
@@ -29,7 +29,7 @@ class AuthController extends Controller
     }
 
 
-    public function authenticate(Request $request)
+    protected function authenticate(Request $request)
     {
         $canLogin = true;
         $loginWith = "Email";
@@ -81,7 +81,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    protected function logout()
     {
         Auth::logout();
         return redirect()->route('login');
