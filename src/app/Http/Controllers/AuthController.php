@@ -11,7 +11,7 @@ class AuthController extends Controller
     protected $title;
     protected $generalUri;
 
-    protected function __construct()
+    public function __construct()
     {
         $this->title = 'Login';
         $this->generalUri = 'login';
