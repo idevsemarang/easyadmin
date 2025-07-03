@@ -11,7 +11,7 @@
                 @endif" @if(sizeof($menu['childrens'])> 0)
                 href="#"
                 @else
-                href="@if(Route::has($menu['key'])) {{route($menu['key'])}} @endif"
+                href="@if(Route::has($menu['key'])) {{route($menu['key'])}} @else {{$menu['url'] }}@endif"
                 @endif
 
                 @if(isset($menu['ajax_load']) && $menu['ajax_load'] == true)
