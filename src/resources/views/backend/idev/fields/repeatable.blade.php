@@ -19,7 +19,11 @@ $preffix_method = (isset($method))? $method."_": "";
             $repeatable = true;
             $field['name'] = $field['name']."[]";
             @endphp
-            @include("easyadmin::backend.idev.fields.".$field['type'])
+            @if (View::exists('backend.idev.fields.'.$field['type']))
+                @include('backend.idev.fields.'.$field['type'])
+            @else
+                @include('easyadmin::backend.idev.fields.'.$field['type'])
+            @endif
             @endforeach
 
             @if($enable_action)
@@ -57,20 +61,6 @@ $preffix_method = (isset($method))? $method."_": "";
         var epochSeconds = Math.floor(epochMilliseconds / 1000);
 
         $('.field-sections:last()').attr('id', '{{$preffix_method}}repeatable-'+epochSeconds)
-        // for (var i = 0; i < fieldCount; i++) {
-        //     var newID = 'field-'+arrAlpabhet[i]+'-'+index
-        //     $('.field-sections:last() .field-repeatable:eq('+i+')').attr('id', newID)
-        //     if ($('#'+newID).hasClass("support-live-select2")) {
-        //         $('.field-sections:last() div:eq('+i+') span').remove()
-        //         $('#'+newID).removeClass("select2-hidden-accessible")
-        //         $('#'+newID).removeAttr("data-select2-id")
-        //         $('#'+newID).removeAttr("tabindex")
-        //         $('#'+newID).removeAttr("aria-hidden")
-        //         $('#'+newID+' option').removeAttr("data-select2-id")
-        //         $('#repeatable-'+index).removeAttr("data-select2-id")
-        //         $('#'+newID).select2();
-        //     }
-        // }
     }
 
 
@@ -81,6 +71,7 @@ $preffix_method = (isset($method))? $method."_": "";
         $('.'+preffixMethod+'field-sections:last()').attr('id', preffixMethod+'repeatable-'+epochSeconds)
 
         $('.'+preffixMethod+'repeatable-sections .row:last()').clone().appendTo($('.'+preffixMethod+'repeatable-sections'))
+        $(".idev-form").attr("id", null)
         // setRepeatableID(numButton)
 
         var htmlRemove = "<button type='button' class='btn btn-sm btn-circle btn-danger my-4 text-white' onclick='remove(\""+preffixMethod+"\","+epochSeconds+")'>"
